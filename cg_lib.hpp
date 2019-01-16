@@ -79,6 +79,8 @@ void r8ge_cg_checkSum_emin(int n , double a[] , double b[] , double x[] , int ra
 void r8ge_cg_newAlphaImprovement_emin(int n , double a[] ,double b[] , double x2[] , int range1 ,int  range2 ,int k) ;
 bool r8ge_cg_newAlphaImprovement_eminForRelativeError(int n , double a[] ,double b[] , double x[] , int range1 ,int  range2 ,int k) ;
 void r8ge_cg_checkSum_emin2(int n ,  double a[] , double  b[] , double  x2[] , int  range1, int  range2, int k ) ;
+void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , int range1 , int range2 , int k)  ;
+
 
 void getCurIndicatorValue( double x[], double r[] , double b[]) ;
 void initialCheckSum(int n , double r[] , double p[] , double x[]);
