@@ -46,93 +46,26 @@ int main (int argc, char** argv)
   cout << "  Test the CG library.\n";
 
 
-  //queue<double>& detector = Global::eminDetector;
-
-  //This part of only fn 
-
-  /*
-
-  for (int i = 0; i < 100; ++i)
-  {
-   
-    Global::previousValueOfIndicator =0 ;
-
-    cout << " Number of Iteration = " << i << endl ;
-
-    r8ge_cg_start (windowSize, psize, threshold, fPos , range1 , range2 , k );
-
-    cout << "  successfulRate = " << Global::successfulRate << " % " <<endl ;
-
-    //detector.pop() ;
-    //detector.pop() ;
-  }
-
-  */
+  
 
   int succesfulrateForIndicator = Global::successfulRate ;
   Global::successfulRate = 0 ;
 
-  /*
-  for (int i = 0; i < 100; ++i)
-  {
-   
-    Global::previousValueOfIndicator =0 ;
-
-    cout << " Number of Iteration = " << i << endl ;
-
-    r8ge_cg_start_withResidual (windowSize, psize, threshold, fPos , range1 , range2 , k );
-
-    cout << "  successfulRate = " << Global::successfulRate << " % " <<endl ;
-
-    //detector.pop() ;
-    //detector.pop() ;
-  }
-
-  int succesfulrateForResidual = Global::successfulRate ;
   
-  */
-
-
-  // Fn with improvement method 
 
 
   cout << " \n";
   cout << "******************************** \n";
   cout << "******************************** \n";
-  cout << "******For improvement ********** \n";
-
-  queue<double>& diffsImp = Global::diffsImprove;
-
-
-  double& totalDifference =  Global::globalTotalDifference;
-  double& prevValueOfIndicator = Global::previousValueOfIndicator;
-  //int& ImpRate= Global::ImproveRate ;
-
-  double averageRelativeError = 0 ;
-
-  double res =0;
-
+ 
   for (int i = 0; i < 100; ++i)
   {
     
-    prevValueOfIndicator=0 ;
-    totalDifference=0 ;
-    //ImpRate=0;
    
 
     cout << "Number of Experience = " << i << endl ;
 
-    //r8ge_cg_start_withImprovement(windowSize, psize, threshold, fPos , range1 , range2 , k );
-    //r8ge_cg_start_withAlphaDetection(windowSize, psize, threshold, fPos , range1 , range2 , k );
-
-    //res = r8ge_cg_start_withAlphaDetectionAndRelativeErrors(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
-
-    //cout<<" Res = "<<res<<endl ;
-    //averageRelativeError = averageRelativeError + res ;
-
-
-
-
+   
     //cout << "SuccessfulRate = " << Global::successfulRate << " % " <<endl ;
     //cout << "SuccessfulRate for improve = " << Global::ImproveRate << " % " <<endl ;
 
@@ -165,8 +98,8 @@ int main (int argc, char** argv)
   cout << "CG_PRB\n";
   cout << "  Normal end of execution.\n";
   //cout << "  successfulRate for fn indicator"<<succesfulrateForIndicator<<  endl;
-  cout << "  SuccessfulRate for fn with improvement "<< succesfulrateForImprovement <<endl ;
-  cout << "  Averae Relative Error "<<averageRelativeError<<endl ;
+  //cout << "  SuccessfulRate for fn with improvement "<< succesfulrateForImprovement <<endl ;
+  //cout << "  Averae Relative Error "<<averageRelativeError<<endl ;
   cout << " \n";
 
 
