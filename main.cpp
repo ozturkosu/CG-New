@@ -158,11 +158,7 @@ int main (int argc, char** argv)
 
   //averageRelativeError = averageRelativeError / unsuccesful ;
 
-  
-  
 
-
-  
     
 //
 //  Terminate.
