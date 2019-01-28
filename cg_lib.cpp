@@ -8,7 +8,7 @@ using namespace std;
 
 # include "cg_lib.hpp"
 # include "bitflip.h"
-# include "omp.h"
+
 
 //****************************************************************************80
 

@@ -4,7 +4,7 @@
 # include <iomanip>
 # include <iostream>
 # include <time.h>
-# include "omp.h"
+
 
 using namespace std;
 
@@ -95,8 +95,6 @@ int main (int argc, char** argv)
 
   // Fn with improvement method 
 
-  
-
 
   cout << " \n";
   cout << "******************************** \n";
@@ -138,7 +136,7 @@ int main (int argc, char** argv)
     //cout << "SuccessfulRate = " << Global::successfulRate << " % " <<endl ;
     //cout << "SuccessfulRate for improve = " << Global::ImproveRate << " % " <<endl ;
 
-    r8ge_cg_Indicator_version2(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
+    r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
 
     
     /*    
@@ -361,6 +359,86 @@ void r8ge_cg_start_withResidual (int windowSize, int psize, double threshold, in
   return;
 }
 //****************************************************************************80
+
+void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k)
+{
+
+  double *a;
+  double *b;
+  double e_norm;
+  int i;
+  int n;
+  double *r;
+  double r_norm;
+  int seed;
+  double *x1;
+  double *x2;
+
+  int winSize = windowSize;
+  double thres = threshold;
+  int flipPosition = fPos;
+  
+  cout << "\n";
+  cout << "R8GE_CG_TEST\n";
+  cout << "  R8GE_CG applies CG to a full storage matrix.\n";
+
+
+   n = psize;
+//
+//  Let A be the -1 2 -1 matrix.
+//
+  srand (time(NULL));
+  seed = rand();
+  a = pds_random ( n, seed );
+//
+//  Choose a random solution.
+//
+  x1 = r8vec_uniform_01_new ( n, seed );
+//
+//  Compute the corresponding right hand side.
+//
+  b = r8ge_mv ( n, n, a, x1 );
+//
+//  Call the CG routine.
+//
+  x2 = new double[n];
+  for ( i = 0; i < n; i++ )
+  {
+    x2[i] = 1.0;
+  }
+  init (n, winSize, thres, flipPosition);
+  //r8ge_cg ( n, a, b, x2 );
+
+
+  r8ge_cg_Indicator_version2( n ,a , b , x2 , range1 , range2 , k) ; 
+
+   cout << "\n";
+
+   delete [] a;
+  delete [] b;
+  delete [] r;
+  delete [] x1;
+  delete [] x2;
+
+  
+  finish();
+  return;
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
 
 void r8ge_cg_start_withImprovement (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k)
 {
