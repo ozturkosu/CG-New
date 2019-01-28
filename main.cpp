@@ -127,21 +127,21 @@ int main (int argc, char** argv)
     //r8ge_cg_start_withImprovement(windowSize, psize, threshold, fPos , range1 , range2 , k );
     //r8ge_cg_start_withAlphaDetection(windowSize, psize, threshold, fPos , range1 , range2 , k );
 
-    res = r8ge_cg_start_withAlphaDetectionAndRelativeErrors(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
+    //res = r8ge_cg_start_withAlphaDetectionAndRelativeErrors(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
 
-    cout<<" Res = "<<res<<endl ;
-    averageRelativeError = averageRelativeError + res ;
-
-
+    //cout<<" Res = "<<res<<endl ;
+    //averageRelativeError = averageRelativeError + res ;
 
 
-    cout << "SuccessfulRate = " << Global::successfulRate << " % " <<endl ;
-    cout << "SuccessfulRate for improve = " << Global::ImproveRate << " % " <<endl ;
 
 
+    //cout << "SuccessfulRate = " << Global::successfulRate << " % " <<endl ;
+    //cout << "SuccessfulRate for improve = " << Global::ImproveRate << " % " <<endl ;
+
+    r8ge_cg_Indicator_version2(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
 
     
-    
+    /*    
 
     while (!diffsImp.empty())
     {
@@ -149,15 +149,17 @@ int main (int argc, char** argv)
         diffsImp.pop();
     }
 
+    */
+
   }
 
-  int succesfulrateForImprovement = Global::successfulRate ;
-  double unsuccesful = Global::undetectedNumber ;
+  //int succesfulrateForImprovement = Global::successfulRate ;
+  //double unsuccesful = Global::undetectedNumber ;
 
-  averageRelativeError = averageRelativeError / unsuccesful ;
+  //averageRelativeError = averageRelativeError / unsuccesful ;
 
   
-
+  
 
 
   
