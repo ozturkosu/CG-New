@@ -17,7 +17,7 @@ void r8ge_cg_start_withImprovement (int windowSize, int psize, double threshold,
 void r8ge_cg_start_withCheckSum (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
 void r8ge_cg_start_withAlphaDetection (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
 double r8ge_cg_start_withAlphaDetectionAndRelativeErrors(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
-
+void  r8ge_cg_start_withNewIndicator(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k ) ;
 
 int main (int argc, char** argv)
 {
@@ -412,9 +412,9 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 
   r8ge_cg_Indicator_version2( n ,a , b , x2 , range1 , range2 , k) ; 
 
-   cout << "\n";
+  cout << "\n";
 
-   delete [] a;
+  delete [] a;
   delete [] b;
   delete [] r;
   delete [] x1;
