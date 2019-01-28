@@ -71,16 +71,6 @@ int main (int argc, char** argv)
 
     r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
 
-    
-    /*    
-
-    while (!diffsImp.empty())
-    {
-     //sum += myqueue.front();
-        diffsImp.pop();
-    }
-
-    */
 
   }
 
@@ -354,7 +344,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   delete [] x2;
 
   
-  finish();
+  //finish();
   return;
 
 
