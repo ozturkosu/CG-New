@@ -3818,17 +3818,54 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       
       cout << " new indicator at i "<< it << " NewIndicator= " << newIndicator <<endl; 
 
+      if( isDetected (newIndicator ))//, detector))
+      {
 
 
+      // bit error occurred, start recovery procedure (if any)
+      // by default, exit.
+
+        cerr << " Bit error detected, terminating application" << endl;
+        cout << " Bit error detected, terminating application" <<endl ;
+        cout << "*******************************************" << endl;
+
+        //cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
+
+        //int& successful = Global::successfulRate ;
+
+        if( it - Global::pos <=10 && it - Global::pos >= 0)
+        {
+          //successful ++ ;
+          Global::successfulRate ++ ;
+        }
+
+        //exit(-1);
+
+        delete [] p;
+        delete [] r;
+        //detector.pop();
+        //detector.pop();
+        //delete detector;
+        return ;
+
+      } 
+      else 
+      {
+        //recordIndicator(curIndicatorValue);
+
+        getIndicator( newIndicator ) ;// ,detector) ;
+      }
+
+
+
+      
 
   }
 
+   delete [] p;
+   delete [] r;
 
-
-
-
-
-
+   return;
 
 
 
