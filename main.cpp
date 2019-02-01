@@ -344,7 +344,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   delete [] x2;
 
   
-  //finish();
+  finish();
   return;
 
 

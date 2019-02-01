@@ -3520,12 +3520,8 @@ void r8ge_cg_newIndicatior_emin(int n , double a[] , double b[] , double x[] , i
   double rap;
   double curIndicatorValue ; 
 
-
-
-
   cout << " Detection by New Indicator Method fn=-x^T*(-rn-b) to detect soft error " <<endl ;
   cout << "" <<endl ;
-
 
   //
   //  Initialize
@@ -3732,11 +3728,9 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
     p[i] = b[i] - ap[i];
   }
 
-
   //
   //  Do the N steps of the conjugate gradient method.
   //
-
 
   for( it = 1; it <= n; it++ )
   {
@@ -3818,13 +3812,11 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       
       cout << " new indicator at i "<< it << " NewIndicator= " << newIndicator <<endl; 
 
+      getIndicator( newIndicator ) ;
+
       if( isDetected (newIndicator ))//, detector))
       {
-
-
-      // bit error occurred, start recovery procedure (if any)
-      // by default, exit.
-
+     
         cerr << " Bit error detected, terminating application" << endl;
         cout << " Bit error detected, terminating application" <<endl ;
         cout << "*******************************************" << endl;
@@ -3843,9 +3835,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
         delete [] p;
         delete [] r;
-        //detector.pop();
-        //detector.pop();
-        //delete detector;
+       
         return ;
 
       } 
@@ -7065,34 +7055,6 @@ void recordResidual (double curRes) {
 bool isDetected( double curFunction )// , queue<double> & detector)
 {
 
-  //queue<double>& detector = Global::eminDetector;
-
-  /*
-
-  if(detector.size() ==0 )
-  {
-      return false ;
-  }
-  else
-  {
-    double prevIndicatorvalue = detector.back() ;
-    double diffIndicatorValue = curFunction - prevIndicatorvalue ;
-
-      if ( diffIndicatorValue > 0 && diffIndicatorValue >= prevIndicatorvalue*1e-13)
-      {
-        
-        return true;
-      }
-      else
-      {
-        return false ;
-      }
-  }
-
-
-  */
-
-
   double& previous = Global::previousValueOfIndicator ;
 
   double diffIndicatorValue = curFunction - previous ;
@@ -7101,9 +7063,7 @@ bool isDetected( double curFunction )// , queue<double> & detector)
 
   if ( diffIndicatorValue > 0 && diffIndicatorValue >= previous*1e-13*-1 )
   {
-    /* code */
     return true ;
-
   }
   else 
   {
@@ -7119,32 +7079,8 @@ void getIndicator( double curFunction  )//, queue<double> & detector)
 
     double& previous = Global::previousValueOfIndicator ;
 
-    /*
-
-    if (detector.size() == 0)
-    {
-      
-
-      detector.push(curFunction) ;
-    }
-    else if ( detector.size() <2)
-    {
-      
-      detector.push(curFunction) ;
-    }
-    else
-    {
-      detector.pop() ;
-      detector.push(curFunction) ;
-    }
-
-    */
-
-
     if ( previous == 0 )
     {
-      /* code */
-
       previous = curFunction ;
     }
     else
@@ -7184,7 +7120,6 @@ bool isFlippedIndicator (double curFunction)
       double curDiff = prevFunc - curFunction;
 
       cout<< "curDiff = "<< curDiff << endl ;
-
       double curTrend = curDiff / prevFunc;
       
       return curTrend < 0 && -curTrend > gTrend + thres;
