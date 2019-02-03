@@ -3814,6 +3814,8 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
       //getIndicator( newIndicator ) ;
 
+      Global::previousValueOfIndicator = newIndicator ;
+
       if( isDetected (newIndicator ))//, detector))
       {
      
@@ -7070,8 +7072,7 @@ bool isDetected( double curFunction )// , queue<double> & detector)
 
 void getIndicator( double curFunction  )//, queue<double> & detector)
 {
-    //queue<double>& detector= Global::eminDetector;
-
+    
     double& previous = Global::previousValueOfIndicator ;
 
     if ( previous == 0 )
@@ -7082,9 +7083,6 @@ void getIndicator( double curFunction  )//, queue<double> & detector)
     {
       previous = curFunction ;
     }
-
-
-
 }
 
 bool isFlippedIndicator (double curFunction)
