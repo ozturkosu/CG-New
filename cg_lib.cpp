@@ -3812,7 +3812,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       
       cout << " new indicator at i "<< it << " NewIndicator= " << newIndicator <<endl; 
 
-      getIndicator( newIndicator ) ;
+      //getIndicator( newIndicator ) ;
 
       if( isDetected (newIndicator ))//, detector))
       {
@@ -3842,13 +3842,8 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       else 
       {
         //recordIndicator(curIndicatorValue);
-
-        getIndicator( newIndicator ) ;// ,detector) ;
+        getIndicator(newIndicator) ;// ,detector) ;
       }
-
-
-
-      
 
   }
 
