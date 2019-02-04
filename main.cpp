@@ -45,13 +45,8 @@ int main (int argc, char** argv)
   cout << "  C++ version\n";
   cout << "  Test the CG library.\n";
 
-
-  
-
   int succesfulrateForIndicator = Global::successfulRate ;
   Global::successfulRate = 0 ;
-
-  
 
 
   cout << " \n";
@@ -61,11 +56,8 @@ int main (int argc, char** argv)
   for (int i = 0; i < 100; ++i)
   {
     
-   
-
     cout << "Number of Experience = " << i << endl ;
-
-   
+ 
     //cout << "SuccessfulRate = " << Global::successfulRate << " % " <<endl ;
     //cout << "SuccessfulRate for improve = " << Global::ImproveRate << " % " <<endl ;
 
@@ -291,8 +283,8 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   double e_norm;
   int i;
   int n;
-  double *r;
-  double r_norm;
+  //double *r;
+  //double r_norm;
   int seed;
   double *x1;
   double *x2;
@@ -339,7 +331,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 
   delete [] a;
   delete [] b;
-  delete [] r;
+  //delete [] r;
   delete [] x1;
   delete [] x2;
 
@@ -347,21 +339,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   finish();
   return;
 
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
 
 void r8ge_cg_start_withImprovement (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k)
 {
@@ -632,7 +610,7 @@ void r8ge_cg_start_withAlphaDetection (int windowSize, int psize, double thresho
 //
   delete [] a;
   delete [] b;
-  delete [] r;
+  //delete [] r;
   delete [] x1;
   delete [] x2;
 
