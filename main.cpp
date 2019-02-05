@@ -58,8 +58,8 @@ int main (int argc, char** argv)
     
     cout << "Number of Experience = " << i << endl ;
  
-    //cout << "SuccessfulRate = " << Global::successfulRate << " % " <<endl ;
-    //cout << "SuccessfulRate for improve = " << Global::ImproveRate << " % " <<endl ;
+    cout << "SuccessfulRate = " << Global::successfulRate << " % " <<endl ;
+   
 
     r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
 
@@ -70,9 +70,7 @@ int main (int argc, char** argv)
   //double unsuccesful = Global::undetectedNumber ;
 
   //averageRelativeError = averageRelativeError / unsuccesful ;
-
-
-    
+     
 //
 //  Terminate.
 //
@@ -82,16 +80,13 @@ int main (int argc, char** argv)
   //cout << "  successfulRate for fn indicator"<<succesfulrateForIndicator<<  endl;
   //cout << "  SuccessfulRate for fn with improvement "<< succesfulrateForImprovement <<endl ;
   //cout << "  Averae Relative Error "<<averageRelativeError<<endl ;
+
+  cout << " Successful Rate = " << Global::successfulRate << " % " <<endl ; 
   cout << " \n";
 
-
-  
   timestamp ( );
 
   return 0;
-
-
-
 
 }
 
