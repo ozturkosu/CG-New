@@ -7058,7 +7058,7 @@ bool isDetected( double curFunction )// , queue<double> & detector)
 
   cout<<" Difference OF f function from previous f = "<<diffIndicatorValue<<endl; 
 
-  if ( diffIndicatorValue > 0 && diffIndicatorValue >= previous*1e-13*-1 )
+  if ( diffIndicatorValue > 0 && abs(diffIndicatorValue) >= previous*1e-13)
   {
     return true ;
   }
