@@ -3704,7 +3704,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
   double newIndicator;
 
-  cout << " Detection by  Indicator_version2 Method fn=-x^T*(-rn-b) to detect soft error  " <<endl ;
+  cout << " Detection by  Indicator_version2 Method fn_new = alpha * r^T * r to detect soft error  " <<endl ;
   cout << "" <<endl ;
 
   //
@@ -3835,10 +3835,10 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
         //exit(-1);
 
-        delete [] p;
-        delete [] r;
+        //delete [] p;
+        //delete [] r;
        
-        return ;
+        //return ;
 
       } 
       else 
