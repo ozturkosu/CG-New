@@ -57,7 +57,6 @@ int main (int argc, char** argv)
   {
     
     cout << "Number of Experience = " << i << endl ;
- 
     cout << "SuccessfulRate = " << Global::successfulRate << " % " <<endl ;
    
 
@@ -278,8 +277,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   double e_norm;
   int i;
   int n;
-  //double *r;
-  //double r_norm;
+  
   int seed;
   double *x1;
   double *x2;
@@ -326,7 +324,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 
   delete [] a;
   delete [] b;
-  //delete [] r;
+  
   delete [] x1;
   delete [] x2;
 
@@ -389,10 +387,7 @@ void r8ge_cg_start_withImprovement (int windowSize, int psize, double threshold,
     x2[i] = 1.0;
   }
   init (n, winSize, thres, flipPosition);
-  //r8ge_cg ( n, a, b, x2 );
-
-  //r8ge_cg_emin( n ,a , b , x2 , range1 , range2 , k) ; 
-  //r8ge_cg_newIndicatior_emin(n , a , b , x2 , range1 , range2 , k) ;
+  
   r8ge_cg_newImprovement_emin(n , a , b , x2 , range1 , range2 , k) ;
 
 //

@@ -2803,7 +2803,7 @@ void r8ge_cg_newImprovement_emin(int n , double a[] , double b[] , double x[] , 
 
 
 
-  cout << " Detection by New Indicator Method fn=-x^T*(-rn-b) to detect soft error with considering Improvement " <<endl ;
+  cout << " Detection by New Indicator Method fn=alpha* r^t * r to detect soft error " <<endl ;
   cout << "" <<endl ;
 
 
@@ -3657,12 +3657,12 @@ void r8ge_cg_newIndicatior_emin(int n , double a[] , double b[] , double x[] , i
 
         //exit(-1);
 
-        delete [] p;
-        delete [] r;
+        //delete [] p;
+        //delete [] r;
         //detector.pop();
         //detector.pop();
         //delete detector;
-        return ;
+        //return ;
 
       } 
       else 
