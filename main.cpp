@@ -6,6 +6,7 @@
 # include <fstream>
 # include <cmath>
 # include <time.h>
+# include <algorithm>
 
 
 using namespace std;
@@ -303,7 +304,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 
 
   //Read Matrix from file // Added Emin at March 6
-  a = new double[n*n] ;
+  
 
   ifstream matrixfile("1138_bus.mtx");
   if(!(matrixfile.is_open())){
@@ -318,6 +319,8 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   cout << " m = "<<m<<endl ;
   cout << " n = "<<ni<<endl ;
   cout << " l = "<<l<<endl ;
+
+  a = new double[m*ni] ;
 
   double *I, *J;
   double *val ;
@@ -335,13 +338,15 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
     xi = I[i] -1 ;
     yi = J[i] -1 ;
 
-    a[xi * n + yi] = val[i] ;
+    a[xi * m + yi] = val[i] ;
 
 
   }
   
   matrixfile.close() ;
 
+
+  cout << " Matrix A is filled from file"<<endl ;
 
 
 
