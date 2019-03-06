@@ -312,7 +312,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   }
   int m,ni,l;
   while(matrixfile.peek()=='%') matrixfile.ignore(2048, '\n');
-  matrixfile>>m>>n>>l ;
+  matrixfile>>m>>ni>>l ;
 
 
   cout << " m = "<<m<<endl ;
