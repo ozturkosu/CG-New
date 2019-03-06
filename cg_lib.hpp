@@ -94,7 +94,7 @@ bool checkSumImpMethod( int n , double a[] ,double x[] , double b[]) ;
 double getResidual ( int m, int n, double a[], double x[], double b[] );
 double getFunctionIndicatorCunverge ( int n, double x[] , double b[] ) ;
 void injectBitflip ( int n, double a[], double x[], double b[] );
-void injectBitFlipNotRandom( int n , double a[] , double x[] , double b[] , int k , int range1 , int range2);
+void injectBitFlipNotRandom( int n , double a[] , double x[] , double b[] ,  int range1 , int range2 , int k );
 void init ( int iter, int winSize, double thres, int flipPosition);
 void finish ();
 bool isFlipped ( double curRes );

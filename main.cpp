@@ -31,7 +31,7 @@ int main (int argc, char** argv)
   int fPos = atoi(argv[3]);   // iteration to flip bits
   int range1=atoi(argv[4]);   //   Bit flip range start
   int range2=atoi(argv[5]) ;  // Bit flip range finish
-  int k=atoi(argv[6]) ;  // K for injecting type
+  int k=atoi(argv[6]) ;  // K for injecting type 0 - 1- 2
   // threshold by default set to 0.1, please modify as needed. 
   double threshold = 1e-1;
   
@@ -297,7 +297,60 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 //
   srand (time(NULL));
   seed = rand();
-  a = pds_random ( n, seed );
+  //a = pds_random ( n, seed ); // pds is returning random positive definite symmetric matrix
+
+
+  //Read Matrix from file // Added Emin at March 6
+  a = new double[n*n] ;
+
+  ifstream matrixfile("1138_bus.mtx");
+  if(!(matrixfile.is_open())){
+      cout << "Error : file not found " <<endl;
+      return;
+  }
+  int m,n,l;
+  while(matrixfile.peek()=='%') matrixfile.ignore(2048, '\n');
+  matrixfile>>m>>n>>l ;
+
+
+  cout << " m = "<<m<<endl ;
+  cout << " n = "<<n<<endl ;
+  cout << " l = "<<l<<endl ;
+
+  double *I, *J;
+  double *val ;
+
+  I = new double[l] ;
+  J = new double[l] ;
+  val = new double[l] ;
+
+  int xi , yi ;
+
+  for (int i = 0; i < l; ++i)
+  {
+    /* code */
+    matrixfile >> I[i] >> J[i] >> val[i] ;
+    xi = I[i] -1 ;
+    yi = J[i] -1 ;
+
+    a[xi * n + yi] = val[i] ;
+
+
+  }
+  
+  matrixfile.close() ;
+
+
+
+
+
+
+
+
+
+
+
+
 //
 //  Choose a random solution.
 //
