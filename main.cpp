@@ -321,6 +321,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   cout << " l = "<<l<<endl ;
 
   a = new double[m*ni] ;
+  std::fill(a , a + m * ni , 0.) ;
 
   double *I, *J;
   double *val ;
