@@ -3,6 +3,8 @@
 # include <cstring>
 # include <iomanip>
 # include <iostream>
+# include <fstream>
+# include <cmath>
 # include <time.h>
 
 
@@ -308,13 +310,13 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
       cout << "Error : file not found " <<endl;
       return;
   }
-  int m,n,l;
+  int m,ni,l;
   while(matrixfile.peek()=='%') matrixfile.ignore(2048, '\n');
   matrixfile>>m>>n>>l ;
 
 
   cout << " m = "<<m<<endl ;
-  cout << " n = "<<n<<endl ;
+  cout << " n = "<<ni<<endl ;
   cout << " l = "<<l<<endl ;
 
   double *I, *J;
@@ -339,14 +341,6 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   }
   
   matrixfile.close() ;
-
-
-
-
-
-
-
-
 
 
 
