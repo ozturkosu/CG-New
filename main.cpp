@@ -354,24 +354,24 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 //
 //  Choose a random solution.
 //
-  x1 = r8vec_uniform_01_new ( n, seed );
+  x1 = r8vec_uniform_01_new ( m, seed );
 //
 //  Compute the corresponding right hand side.
 //
-  b = r8ge_mv ( n, n, a, x1 );
+  b = r8ge_mv ( m, ni, a, x1 );
 //
 //  Call the CG routine.
 //
-  x2 = new double[n];
-  for ( i = 0; i < n; i++ )
+  x2 = new double[m];
+  for ( i = 0; i < m; i++ )
   {
     x2[i] = 1.0;
   }
-  init (n, winSize, thres, flipPosition);
+  init (m, winSize, thres, flipPosition);
   //r8ge_cg ( n, a, b, x2 );
 
 
-  r8ge_cg_Indicator_version2( n ,a , b , x2 , range1 , range2 , k) ; 
+  r8ge_cg_Indicator_version2( m ,a , b , x2 , range1 , range2 , k) ; 
 
   cout << "\n";
 
