@@ -3835,10 +3835,10 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
         //exit(-1);
 
-        //delete [] p;
-        //delete [] r;
+        delete [] p;
+        delete [] r;
        
-        //return ;
+        return ;
 
       } 
       else 
@@ -7058,7 +7058,7 @@ bool isDetected( double curFunction )// , queue<double> & detector)
 
   cout<<" Difference OF f function from previous f = "<<diffIndicatorValue<<endl; 
 
-  if ( diffIndicatorValue > 0 && abs(diffIndicatorValue) >= previous*1e-13)
+  if ( diffIndicatorValue > 0 && abs(diffIndicatorValue) >= abs(previous*1e-9))
   {
     return true ;
   }
