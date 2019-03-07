@@ -308,7 +308,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   
 
   //ifstream matrixfile("1138_bus.mtx");
-  ifstream matrixfile("bcsstk03.mtx");
+  ifstream matrixfile("bcsstk06.mtx");
   if(!(matrixfile.is_open())){
       cout << "Error : file not found " <<endl;
       return;
