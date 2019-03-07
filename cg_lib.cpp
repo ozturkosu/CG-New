@@ -3835,10 +3835,10 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
         //exit(-1);
 
-        delete [] p;
-        delete [] r;
+        //delete [] p;
+        //delete [] r;
        
-        return ;
+        //return ;
 
       } 
       else 

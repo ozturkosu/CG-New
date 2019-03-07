@@ -343,9 +343,9 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 
     a[xi * m + yi] = val[i] ;
 
-    cout << " i = " << i << endl ;
-    cout << "a[x][y] "<< a[xi * m + yi] <<endl ;
-    cout << " I[i] = " <<I[i] <<" J[i] = " << J[i] << endl ;
+    //cout << " i = " << i << endl ;
+    //cout << "a[x][y] "<< a[xi * m + yi] <<endl ;
+    //cout << " I[i] = " <<I[i] <<" J[i] = " << J[i] << endl ;
 
 
   }
