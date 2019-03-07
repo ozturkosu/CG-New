@@ -300,13 +300,15 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 //
   srand (time(NULL));
   seed = rand();
+
   //a = pds_random ( n, seed ); // pds is returning random positive definite symmetric matrix
 
 
   //Read Matrix from file // Added Emin at March 6
   
 
-  ifstream matrixfile("1138_bus.mtx");
+  //ifstream matrixfile("1138_bus.mtx");
+  ifstream matrixfile("bcsstk03.mtx");
   if(!(matrixfile.is_open())){
       cout << "Error : file not found " <<endl;
       return;
@@ -344,8 +346,6 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
     cout << " i = " << i << endl ;
     cout << "a[x][y] "<< a[xi * m + yi] <<endl ;
     cout << " I[i] = " <<I[i] <<" J[i] = " << J[i] << endl ;
-
-
 
 
   }
