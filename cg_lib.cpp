@@ -3698,6 +3698,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
   double *p;
   double pap;
   double pr;
+  double rTr;
   double *r; //It takes it as parameter
   double rap;
   double curIndicatorValue ; 
@@ -3761,6 +3762,8 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
      pap = r8vec_dot_product ( n, p, ap );
      pr = r8vec_dot_product ( n, p, r );
 
+     rTr = r8vec_dot_product( n , r , r) ;
+
      if ( pap == 0.0 )
      {
         delete [] ap;
@@ -3769,7 +3772,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
      alpha = pr / pap;
 
-     newIndicator = alpha * pr ;
+     newIndicator = alpha * rTr ;
 
       //pr = (rk)^T(rk)
       //pap = (pk)^T A (pk)  A is Symetric positive definite (SPD)
