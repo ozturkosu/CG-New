@@ -21,7 +21,8 @@ void r8ge_cg_start_withCheckSum (int windowSize, int psize, double threshold, in
 void r8ge_cg_start_withAlphaDetection (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
 double r8ge_cg_start_withAlphaDetectionAndRelativeErrors(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
 void  r8ge_cg_start_withNewIndicator(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k ) ;
-
+void r8ge_cr_start_withResidual(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
+void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k);
 int main (int argc, char** argv)
 {
   if (argc != 7) {
@@ -63,8 +64,8 @@ int main (int argc, char** argv)
     cout << "SuccessfulRate = " << Global::successfulRate << " % " <<endl ;
    
 
-    r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
-
+    //r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
+    r8ge_gcr_start_withResidual ( windowSize, psize, threshold, fPos , range1 , range2 , k);
 
   }
 
@@ -272,6 +273,98 @@ void r8ge_cg_start_withResidual (int windowSize, int psize, double threshold, in
 }
 //****************************************************************************80
 
+
+void r8ge_cr_start_withResidual(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) 
+{
+
+    double *a;
+  double *b;
+  double e_norm;
+  int i;
+  int n;
+  double *r;
+  double r_norm;
+  int seed;
+  double *x1;
+  double *x2;
+
+  int winSize = windowSize;
+  double thres = threshold;
+  int flipPosition = fPos;
+  
+  cout << "\n";
+  cout << "R8GE_CG_TEST\n";
+  cout << "  R8GE_CG applies CG to a full storage matrix.\n";
+
+  //cout << " Number of "
+
+
+
+  n = psize;
+//
+//  Let A be the -1 2 -1 matrix.
+//
+  srand (time(NULL));
+  seed = rand();
+  a = pds_random ( n, seed );
+//
+//  Choose a random solution.
+//
+  x1 = r8vec_uniform_01_new ( n, seed );
+//
+//  Compute the corresponding right hand side.
+//
+  b = r8ge_mv ( n, n, a, x1 );
+//
+//  Call the CG routine.
+//
+  x2 = new double[n];
+  for ( i = 0; i < n; i++ )
+  {
+    x2[i] = 1.0;
+  }
+  init (n, winSize, thres, flipPosition);
+  //r8ge_cg ( n, a, b, x2 );
+
+  r8ge_cg_emin( n ,a , b , x2 , range1 , range2 , k) ; 
+  //r8ge_cg_newIndicatior_emin(n , a , b , x2 , range1 , range2 , k) ;
+
+
+//
+//  Compute the residual.  //Emin Note = calculation residual again is non necessary because cg calculate residual as well 
+//
+  //r = r8ge_res ( n, n, a, x2, b );
+  //r_norm = r8vec_norm ( n, r );
+//
+//  Compute the error.
+//
+  //e_norm = r8vec_norm_affine ( n, x1, x2 );
+//
+//  Report.
+//
+  cout << "\n";
+  //cout << "  Number of variables N = " << n << "\n";
+  //cout << "  Norm of residual ||Ax-b|| = " << r_norm << "\n";
+  //cout << "  Norm of error ||x1-x2|| = " << e_norm << "\n";
+//
+//  Free memory.
+//
+  delete [] a;
+  delete [] b;
+  delete [] r;
+  delete [] x1;
+  delete [] x2;
+
+  
+  finish();
+  return;
+
+
+
+
+
+}
+
 void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k)
 {
 
@@ -392,6 +485,129 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   return;
 
 }
+
+void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k)
+{
+
+  double *a;
+  double *b;
+  double e_norm;
+  int i;
+  int n;
+  
+  int seed;
+  double *x1;
+  double *x2;
+
+  int winSize = windowSize;
+  double thres = threshold;
+  int flipPosition = fPos;
+  
+  cout << "\n";
+  cout << "R8GE_CG_TEST\n";
+  cout << "  R8GE_CG applies CG to a full storage matrix.\n";
+
+
+   n = psize;
+//
+//  Let A be the -1 2 -1 matrix.
+//
+  srand (time(NULL));
+  seed = rand();
+
+  //a = pds_random ( n, seed ); // pds is returning random positive definite symmetric matrix
+
+
+  //Read Matrix from file // Added Emin at March 6
+  
+
+  //ifstream matrixfile("1138_bus.mtx");
+  ifstream matrixfile("bcsstk06.mtx");
+  if(!(matrixfile.is_open())){
+      cout << "Error : file not found " <<endl;
+      return;
+  }
+  int m,ni,l;
+  while(matrixfile.peek()=='%') matrixfile.ignore(2048, '\n');
+  matrixfile>>m>>ni>>l ;
+
+
+  cout << " m = "<<m<<endl ;
+  cout << " n = "<<ni<<endl ;
+  cout << " l = "<<l<<endl ;
+
+  a = new double[m*ni] ;
+  std::fill(a , a + m * ni , 0.) ;
+
+  double *I, *J;
+  double *val ;
+
+  I = new double[l] ;
+  J = new double[l] ;
+  val = new double[l] ;
+
+  int xi , yi ;
+
+  for (int i = 0; i < l; ++i)
+  {
+    /* code */
+    matrixfile >> I[i] >> J[i] >> val[i] ;
+    xi = I[i] -1 ;
+    yi = J[i] -1 ;
+
+    a[xi * m + yi] = val[i] ;
+
+    //cout << " i = " << i << endl ;
+    //cout << "a[x][y] "<< a[xi * m + yi] <<endl ;
+    //cout << " I[i] = " <<I[i] <<" J[i] = " << J[i] << endl ;
+
+
+  }
+  
+  matrixfile.close() ;
+
+
+  cout << " Matrix A is filled from file"<<endl ;
+
+
+
+//
+//  Choose a random solution.
+//
+  x1 = r8vec_uniform_01_new ( m, seed );
+//
+//  Compute the corresponding right hand side.
+//
+  b = r8ge_mv ( m, ni, a, x1 );
+//
+//  Call the CG routine.
+//
+  x2 = new double[m];
+  for ( i = 0; i < m; i++ )
+  {
+    x2[i] = 1.0;
+  }
+  init (m, winSize, thres, flipPosition);
+  //r8ge_cg ( n, a, b, x2 );
+
+
+  //r8ge_cg_Indicator_version2( m ,a , b , x2 , range1 , range2 , k) ; 
+  r8ge_gcr_Residual( m ,a , b , x2 , range1 , range2 , k) ; 
+
+  cout << "\n";
+
+  delete [] a;
+  delete [] b;
+  
+  delete [] x1;
+  delete [] x2;
+
+  
+  finish();
+  return;
+
+}
+
 
 void r8ge_cg_start_withImprovement (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k)
 {
