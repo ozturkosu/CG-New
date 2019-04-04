@@ -3768,6 +3768,8 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
       alpha = rar / apap ;
 
+      double previousRes= r8vec_norm(n , r ) ;
+
 
       for ( i = 0; i < n; i++ )
       {
@@ -3808,11 +3810,39 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
 
       //Error Detection
-
       double curRes= r8vec_norm(n , r ) ;
+      cout << "Norm of residual ||Ax-b|| = " <<  curRes << endl;
 
+      /*
+      
 
+       if ( isFlipped(curRes )) 
+       {
 
+         
+
+          cerr << "Bit error detected, terminating application" << endl;
+          cout << "Bit error detected, terminating application" << endl;
+         
+
+          if( it - Global::pos <=10 && it - Global::pos >= 0)
+          {
+               //successful ++ ;
+                  Global::successfulRate ++ ;
+          }
+
+           delete [] p;
+           delete [] r;
+
+       } 
+       else
+       {
+         recordResidual(curRes);
+       }
+
+      cout << "res at i = " << it << endl;
+      cout << " curRes = " <<curRes <<endl ;
+      */
 
 
 
