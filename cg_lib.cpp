@@ -3811,8 +3811,10 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
       //Error Detection
       double curRes= r8vec_norm(n , r ) ;
-      cout << "Norm of residual ||Ax-b|| = " <<  curRes << endl;
+      cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
 
+      double curProposedIndicator = getCurIndicatorValue( x, r , b, n) ;
+      cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
       /*
       
 
