@@ -3807,6 +3807,15 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
       }
 
 
+      //Error Detection
+
+      double curRes= r8vec_norm(n , r ) ;
+
+
+
+
+
+
   }
 
   delete [] p;
@@ -3816,14 +3825,6 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
 
 }
-
-
-
-
-
-
-
-
 
 
 
