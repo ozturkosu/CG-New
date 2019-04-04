@@ -3757,7 +3757,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
       ar = r8ge_mv ( n, n, a, r );
 
       rar = r8vec_dot_product(n , r, ar) ;
-      apap = r8vec_dot_product(n , ap, ap) 
+      apap = r8vec_dot_product(n , ap, ap) ;
 
       if ( apap == 0.0 )
       {
@@ -3789,7 +3789,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
       ar = r8ge_mv ( n, n, a, r );
 
-      updated_rar= (n, r, ar) ;
+      updated_rar=r8vec_dot_product(n, r, ar) ;
 
       beta =  updated_rar / rar ;
 
