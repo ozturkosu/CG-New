@@ -3736,6 +3736,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
 
   double preResidual=0;
+  double curRes = 0;
 
   for( it=1 ; it <= n ; it ++)
   {
@@ -3815,7 +3816,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
       preResidual = curRes ;
 
-      double curRes= r8vec_norm(n , r ) ;
+      curRes= r8vec_norm(n , r ) ;
       cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
 
       double curProposedIndicator = getCurIndicatorValue( x, r , b, n) ;
