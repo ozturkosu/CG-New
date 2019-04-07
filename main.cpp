@@ -37,7 +37,7 @@ int main (int argc, char** argv)
   int range1=atoi(argv[4]);   //   Bit flip range start
   int range2=atoi(argv[5]) ;  // Bit flip range finish
   int k=atoi(argv[6]) ;  // K for injecting type 0 - 1- 2
-  std::string matrixname=argv[6] ;
+  std::string matrixname=argv[7] ;
   // threshold by default set to 0.1, please modify as needed. 
   double threshold = 1e-1;
   
