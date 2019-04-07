@@ -3735,6 +3735,8 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
   }
 
 
+  double preResidual=0;
+
   for( it=1 ; it <= n ; it ++)
   {
 
@@ -3810,22 +3812,25 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
 
       //Error Detection
+
+      preResidual = curRes ;
+
       double curRes= r8vec_norm(n , r ) ;
       cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
 
       double curProposedIndicator = getCurIndicatorValue( x, r , b, n) ;
       cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
-      /*
+      
       
 
-       if ( isFlipped(curRes )) 
+       if (curRes > preResidual ) 
        {
-
-         
 
           cerr << "Bit error detected, terminating application" << endl;
           cout << "Bit error detected, terminating application" << endl;
-         
+
+          cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
+          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
 
           if( it - Global::pos <=10 && it - Global::pos >= 0)
           {
@@ -3836,15 +3841,34 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
            delete [] p;
            delete [] r;
 
-       } 
-       else
-       {
-         recordResidual(curRes);
-       }
+           return ;
 
-      cout << "res at i = " << it << endl;
-      cout << " curRes = " <<curRes <<endl ;
-      */
+       } 
+       else if(isnan(curRes))
+       {
+
+        cerr << "Bit error detected residual is nan, terminating application" << endl;
+        cout << "Bit error detected residual is nan, terminating application" << endl;
+
+        cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
+        cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
+
+
+        if( it - Global::pos <=10 && it - Global::pos >= 0)
+        {
+               //successful ++ ;
+                  Global::successfulRate ++ ;
+        }
+
+        delete [] p;
+        delete [] r;
+
+        return ;
+
+
+       }
+     
+      
 
 
 

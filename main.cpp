@@ -7,6 +7,7 @@
 # include <cmath>
 # include <time.h>
 # include <algorithm>
+# include <cstring>
 
 
 using namespace std;
@@ -22,10 +23,10 @@ void r8ge_cg_start_withAlphaDetection (int windowSize, int psize, double thresho
 double r8ge_cg_start_withAlphaDetectionAndRelativeErrors(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
 void  r8ge_cg_start_withNewIndicator(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k ) ;
 void r8ge_cr_start_withResidual(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
-void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k);
+void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k, std::string matrixname);
 int main (int argc, char** argv)
 {
-  if (argc != 7) {
+  if (argc != 8) {
     cout << "usage: ./main [windowSize] [problemSize] [flipPosition] [range1] [range2] [Bit Injecting Type]" << endl;
     return 0;
   }
@@ -36,6 +37,7 @@ int main (int argc, char** argv)
   int range1=atoi(argv[4]);   //   Bit flip range start
   int range2=atoi(argv[5]) ;  // Bit flip range finish
   int k=atoi(argv[6]) ;  // K for injecting type 0 - 1- 2
+  std::string matrixname=argv[6] ;
   // threshold by default set to 0.1, please modify as needed. 
   double threshold = 1e-1;
   
@@ -65,7 +67,7 @@ int main (int argc, char** argv)
    
 
     //r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
-    r8ge_gcr_start_withResidual ( windowSize, psize, threshold, fPos , range1 , range2 , k);
+    r8ge_gcr_start_withResidual ( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
 
   }
 
@@ -486,7 +488,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 
 }
 
-void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k)
+void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k , std::string matrixname)
 {
 
   double *a;
@@ -521,8 +523,15 @@ void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, i
   //Read Matrix from file // Added Emin at March 6
   
 
+  char nameOfMatrix[matrixname.size() +1] ;
+  strcpy(nameOfMatrix , matrixname.c_str()) ;
+
+
+
+
   //ifstream matrixfile("1138_bus.mtx");
-  ifstream matrixfile("bcsstk06.mtx");
+  //ifstream matrixfile("bcsstk06.mtx");
+  ifstream matrixfile(nameOfMatrix);
   if(!(matrixfile.is_open())){
       cout << "Error : file not found " <<endl;
       return;
