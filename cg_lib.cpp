@@ -3886,6 +3886,26 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
                   Global::successfulRate ++ ;
           }
 
+          delete [] p;
+          delete [] r;
+
+          return ;
+
+       }
+       else if(isinf(abs(curProposedIndicator)))
+       {
+          cerr << "Bit error detected by proposed indicator is inf, terminating application" << endl;
+          cout << "Bit error detected by proposed indicator is inf, terminating application" << endl;
+
+          cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
+          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
+
+          if( it - Global::pos <=10 && it - Global::pos >= 0)
+          {
+               //successful ++ ;
+                  Global::successfulRate ++ ;
+          }
+
            delete [] p;
            delete [] r;
 
