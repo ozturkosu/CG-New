@@ -3738,6 +3738,9 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
   double preResidual=0;
   double curRes = 0;
 
+  double curProposedIndicator =0;
+  double prevProposedIndicator = 0;
+
   for( it=1 ; it <= n ; it ++)
   {
 
@@ -3815,6 +3818,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
       //Error Detection
 
       preResidual = curRes ;
+      prevProposedIndicator= curProposedIndicator ;
 
       curRes= r8vec_norm(n , r ) ;
       cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
@@ -3827,8 +3831,8 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
        if (curRes > preResidual && it != 1 ) 
        {
 
-          cerr << "Bit error detected, terminating application" << endl;
-          cout << "Bit error detected, terminating application" << endl;
+          cerr << "Bit error detected by Residual, terminating application" << endl;
+          cout << "Bit error detected by Residual, terminating application" << endl;
 
           cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
           cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
@@ -3866,6 +3870,48 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
         return ;
 
+
+       }
+       else if(curProposedIndicator > prevProposedIndicator && it !=1)
+       {
+          cerr << "Bit error detected by proposed indicator, terminating application" << endl;
+          cout << "Bit error detected by proposed indicator, terminating application" << endl;
+
+          cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
+          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
+
+          if( it - Global::pos <=10 && it - Global::pos >= 0)
+          {
+               //successful ++ ;
+                  Global::successfulRate ++ ;
+          }
+
+           delete [] p;
+           delete [] r;
+
+           return ;
+
+       }
+       else if(isnan(curProposedIndicator))
+       {
+        
+        cerr << "Bit error detected proposed indicator is nan, terminating application" << endl;
+        cout << "Bit error detected proposed indicator is nan, terminating application" << endl;
+
+        cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
+        cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
+
+
+        if( it - Global::pos <=10 && it - Global::pos >= 0)
+        {
+               //successful ++ ;
+                  Global::successfulRate ++ ;
+        }
+
+        delete [] p;
+        delete [] r;
+
+        return ;
 
        }
      
