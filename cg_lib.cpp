@@ -53,6 +53,7 @@ int i4_min ( int i1, int i2 )
 }
 //****************************************************************************80
 
+
 double *orth_random ( int n, int &seed )
 
 //****************************************************************************80
@@ -3834,8 +3835,8 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
           cerr << "Bit error detected by Residual, terminating application" << endl;
           cout << "Bit error detected by Residual, terminating application" << endl;
 
-          cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
-          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
+          cout << "Norm of residual at current  ="<< it <<" ||Ax-b||_n = " <<  curRes << endl;
+          cout << "Norm of residual at previous ="<< it <<" ||Ax-b||_{n-1} = " <<  preResidual << endl;
 
           if( it - Global::pos <=10 && it - Global::pos >= 0)
           {
@@ -4368,6 +4369,12 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
     double curIndicatorValue ;
 
+    double preResidual=0;
+    double curRes = 0;
+
+    double curProposedIndicator =0;
+    double prevProposedIndicator = 0;
+
     cout << " Emin new bi-cg method is started " << endl ;
 
     //  Initialize
@@ -4489,32 +4496,36 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
           //Error Detection
 
-          curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
+        preResidual = curRes ;
+        prevProposedIndicator= curProposedIndicator ;
 
-          cout << "IndicatorFunction Value at i = " << it << endl;
-          cout << "CurIndicatorValue = " << curIndicatorValue  <<endl ;
+        curRes= r8vec_norm(n , r ) ;
+        cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
+
+        double curProposedIndicator = getCurIndicatorValue( x, r , b, n) ;
+        cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
+            
 
 
 
-
-
-        if( isDetected (curIndicatorValue ) && it != 1)//, detector))
+        if( curRes > preResidual && it != 1)//, detector))
         {
 
+          cerr << "Bit error detected by Residual, terminating application" << endl;
+          cout << "Bit error detected by Residual, terminating application" << endl;
 
-          cerr << " Bit error detected, terminating application" << endl;
-          cout << " Bit error detected, terminating application" <<endl ;
-          cout << "*******************************************" << endl;
-
-          cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
-
-          //int& successful = Global::successfulRate ;
+          cout << "Norm of residual at current  ="<< it <<" ||Ax-b||_n = " <<  curRes << endl;
+          cout << "Norm of residual at previous ="<< it <<" ||Ax-b||_{n-1} = " <<  preResidual << endl;
 
           if( it - Global::pos <=10 && it - Global::pos >= 0)
           {
-            //successful ++ ;
-            Global::successfulRate ++ ;
+               //successful ++ ;
+                  Global::successfulRate ++ ;
           }
+
+         
+
+        
 
 
           /*
@@ -4531,12 +4542,38 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
           */
         } 
-        else 
+        else if(isnan(curRes))
         {
-          getIndicator( curIndicatorValue ) ;// ,detector) ;
-        }
 
-    }
+          cerr << "Bit error detected residual is nan, terminating application" << endl;
+          cout << "Bit error detected residual is nan, terminating application" << endl;
+
+          cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
+         
+
+          if( it - Global::pos <=10 && it - Global::pos >= 0)
+          {
+                 //successful ++ ;
+                    Global::successfulRate ++ ;
+          }
+
+           /*
+            delete [] p;
+            delete [] p_prime;
+
+            delete [] r;
+            delete [] r_prime;
+
+            delete [] s;
+            delete [] s_prime;
+
+            return ;
+
+          */
+
+         
+
+        }
 
 
 
