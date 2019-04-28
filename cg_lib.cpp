@@ -4228,7 +4228,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
         s = r8ge_mv(n , n , a, p) ;
 
         delete [] s_prime ;
-        s_prime = r8vec_dot_product( n, a , p_prime) ;
+        s_prime = r8ge_mv_TransposeA( n, n , a , p_prime) ;
 
 
         //Alpha = (rn_prime^t * rn) / ( p_prime^t * sn )
