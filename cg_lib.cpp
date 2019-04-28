@@ -4523,7 +4523,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
                   Global::successfulRate ++ ;
           }
 
-        
+          /*
           
             delete [] p;
             delete [] p_prime;
@@ -4535,7 +4535,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
             delete [] s_prime;
 
             return ;
-
+          */
           
         } 
         else if(isnan(curRes))
@@ -4553,7 +4553,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
                       Global::successfulRate ++ ;
             }
 
-             
+             /*
               delete [] p;
               delete [] p_prime;
 
@@ -4565,7 +4565,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
               return ;
 
-            
+            */
 
          
 
