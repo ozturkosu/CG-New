@@ -4545,37 +4545,37 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         else if(isnan(curRes))
         {
 
-          cerr << "Bit error detected residual is nan, terminating application" << endl;
-          cout << "Bit error detected residual is nan, terminating application" << endl;
+            cerr << "Bit error detected residual is nan, terminating application" << endl;
+            cout << "Bit error detected residual is nan, terminating application" << endl;
 
-          cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
-         
+            cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
+           
 
-          if( it - Global::pos <=10 && it - Global::pos >= 0)
-          {
-                 //successful ++ ;
-                    Global::successfulRate ++ ;
-          }
+            if( it - Global::pos <=10 && it - Global::pos >= 0)
+            {
+                   //successful ++ ;
+                      Global::successfulRate ++ ;
+            }
 
-           /*
-            delete [] p;
-            delete [] p_prime;
+             /*
+              delete [] p;
+              delete [] p_prime;
 
-            delete [] r;
-            delete [] r_prime;
+              delete [] r;
+              delete [] r_prime;
 
-            delete [] s;
-            delete [] s_prime;
+              delete [] s;
+              delete [] s_prime;
 
-            return ;
+              return ;
 
-          */
+            */
 
          
 
         }
 
-
+    }
 
 
 
