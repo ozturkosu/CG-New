@@ -4199,7 +4199,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
     beta = 0;
 
     s = r8ge_mv(n , n , a, x) ;
-    s_prime = r8vec_dot_product( n, A , p_prime) ;
+    s_prime = r8vec_dot_product( n, a , p_prime) ;
 
 
     for ( it = 0; i <=n ; it++)
