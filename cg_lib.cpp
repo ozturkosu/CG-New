@@ -4262,6 +4262,17 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
         beta =  r8vec_dot_product(n, r_prime , r) / rr ;
 
 
+          //Error Detection
+
+          curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
+
+          cout << "IndicatorFunction Value at i = " << it << endl;
+          cout << "CurIndicatorValue = " << curIndicatorValue  <<endl ;
+
+
+
+
+
         if( isDetected (curIndicatorValue ))//, detector))
         {
 
