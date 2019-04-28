@@ -4428,7 +4428,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
     s_prime = r8ge_mv_TransposeA( n, n , a , p_prime) ;
 
 
-    for ( it = 0; i <=n ; it++)
+    for ( it = 0; it <=n ; it++)
     {
      
         if (it == Global::pos) 
