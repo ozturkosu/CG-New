@@ -4199,7 +4199,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
     beta = 0;
 
     s = r8ge_mv(n , n , a, x) ;
-    s_prime = r8vec_dot_product( n, a , p_prime) ;
+    s_prime = r8ge_mv_TransposeA( n, n , a , p_prime) ;
 
 
     for ( it = 0; i <=n ; it++)
@@ -4228,7 +4228,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
         s = r8ge_mv(n , n , a, p) ;
 
         delete [] s_prime ;
-        s_prime = r8vec_dot_product( n, A , p_prime) ;
+        s_prime = r8vec_dot_product( n, a , p_prime) ;
 
 
         //Alpha = (rn_prime^t * rn) / ( p_prime^t * sn )
@@ -4291,7 +4291,6 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
         } 
         else 
         {
-
           getIndicator( curIndicatorValue ) ;// ,detector) ;
         }
 
@@ -4562,6 +4561,38 @@ double *r8ge_mv ( int m, int n, double a[], double x[] )
 
   return b;
 }
+
+
+
+double *r8ge_mv_TransposeA ( int m, int n, double a[], double x[] )
+{
+
+  int i;
+  int j;
+  double *b;
+
+  b = new double[m];
+
+  for ( i = 0; i < m; i++ )
+  {
+    b[i] = 0.0;
+    for ( j = 0; j < n; j++ )
+    {
+      b[i] = b[i] + a[j+i*m] * x[j];
+    }
+  }
+
+  return b;
+
+}
+
+
+
+
+
+
+
+
 //****************************************************************************80
 
 double *r8ge_res ( int m, int n, double a[], double x[], double b[] )

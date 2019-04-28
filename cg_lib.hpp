@@ -27,6 +27,7 @@ double *r83t_res ( int m, int n, double a[], double x[], double b[] );
 void r8ge_cg ( int n, double a[], double b[], double x[] );
 double *r8ge_dif2 ( int m, int n );
 double *r8ge_mv ( int m, int n, double a[], double x[] );
+double *r8ge_mv_TransposeA ( int m, int n, double a[], double x[] ) ;
 double *r8ge_res ( int m, int n, double a[], double x[], double b[] );
 
 void r8mat_copy ( int m, int n, double a1[], double a2[] );
