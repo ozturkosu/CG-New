@@ -14,7 +14,7 @@ main.o: main.cpp
 
 mainbcr: cg_lib.o main.o
 	#g++ main.o $(LIBPATH)/cg_lib.o -lm -o main
-	g++ main.o cg_lib.o -lm -o mainbcg
+	g++ main.o cg_lib.o -lm -o mainbcr
 	#mpic++ main.o cg_lib.o -lm -o main
 
 clean:
