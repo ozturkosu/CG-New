@@ -73,7 +73,7 @@ int main (int argc, char** argv)
     //r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
     //r8ge_gcr_start_withResidual ( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
     //r8ge_bcg_start_withIndicator( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
-    r8ge_bcr_start_withIndicator(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k , std::string matrixname);
+    r8ge_bcr_start_withIndicator( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
   }
 
   //int succesfulrateForImprovement = Global::successfulRate ;
