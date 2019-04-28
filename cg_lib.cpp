@@ -4508,7 +4508,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
 
 
-        if( curRes > preResidual && it != 0)//, detector))
+        if( curRes - preResidual > 1 && it != 0)//, detector))
         {
 
           cerr << "Bit error detected by Residual, terminating application" << endl;
