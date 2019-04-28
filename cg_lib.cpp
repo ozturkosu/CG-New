@@ -4157,7 +4157,6 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
     cout << " Emin new bi-cg method is started " << endl ;
 
-        //
     //  Initialize
     //    AP = A * x,
     //    R  = b - A * x,
@@ -4206,15 +4205,10 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
     for ( it = 0; i <=n ; it++)
     {
      
-         if (it == Global::pos) {
-        //injectBitflip (n, a, x, b);
-
-               injectBitFlipNotRandom(n , r, p , x ,range1, range2, k) ;
-
+        if (it == Global::pos) 
+        {
+          injectBitFlipNotRandom(n , r, p , x ,range1, range2, k) ;
         }
-
-      
-
 
         for ( i = 0; i < n; i++ )
         {
@@ -4291,7 +4285,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
           delete [] s;
           delete [] s_prime;
-          
+
           return ;
 
         } 
