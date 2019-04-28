@@ -4508,7 +4508,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
 
 
-        if( curRes > preResidual && it != 1)//, detector))
+        if( curRes > preResidual && it != 0)//, detector))
         {
 
           cerr << "Bit error detected by Residual, terminating application" << endl;
@@ -4523,12 +4523,8 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
                   Global::successfulRate ++ ;
           }
 
-         
-
         
-
-
-          /*
+          
             delete [] p;
             delete [] p_prime;
 
@@ -4540,7 +4536,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
             return ;
 
-          */
+          
         } 
         else if(isnan(curRes))
         {
@@ -4557,7 +4553,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
                       Global::successfulRate ++ ;
             }
 
-             /*
+             
               delete [] p;
               delete [] p_prime;
 
@@ -4569,7 +4565,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
               return ;
 
-            */
+            
 
          
 
