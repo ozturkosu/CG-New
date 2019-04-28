@@ -3877,8 +3877,8 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
           cerr << "Bit error detected by proposed indicator, terminating application" << endl;
           cout << "Bit error detected by proposed indicator, terminating application" << endl;
 
-          cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
-          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
+          
+          
 
           if( it - Global::pos <=10 && it - Global::pos >= 0)
           {
@@ -4124,6 +4124,207 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
 
 }
+
+
+void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int range2 , int k )
+{
+    double alpha;
+    double *ap;
+    double *s ;
+    double *s_prime ;
+
+
+    double beta ;
+    int i;
+    int it;
+
+    double *p;
+    double *p_prime;
+
+
+    double pap;
+    double pr;
+
+
+    double *r; //It takes it as parameter
+    double *r_prime;
+
+
+    double rap;
+    double rr;
+
+    double curIndicatorValue ;
+
+    cout << " Emin new bi-cg method is started " << endl ;
+
+        //
+    //  Initialize
+    //    AP = A * x,
+    //    R  = b - A * x,
+    //    P  = b - A * x.
+    //
+    ap = r8ge_mv ( n, n, a, x );
+    r = new double[n];
+
+    //r_0 = b- Ax0
+
+    for ( i = 0; i < n; i++ )
+    {
+      r[i] = b[i] - ap[i];
+    }
+
+
+    //Choose ro_prime = r_0
+
+    for ( i = 0; i < n; i++ )
+    {
+      r_prime[i] = b[i] - ap[i];
+    }
+
+
+    //SET p_prime_0 = p_0 = 0 and beta = 0 ;
+
+    p = new double[n];
+    for ( i = 0; i < n; i++ )
+    {
+      p[i] = 0 ;
+    }
+
+
+    p_prime = new double[n];
+    for ( i = 0; i < n; i++ )
+    {
+      p_prime[i] = 0 ;
+    }
+
+    beta = 0;
+
+    s = r8ge_mv(n , n , a, x) ;
+    s_prime = r8vec_dot_product( n, A , p_prime) ;
+
+
+    for ( it = 0; i <=n ; it++)
+    {
+     
+         if (it == Global::pos) {
+        //injectBitflip (n, a, x, b);
+
+               injectBitFlipNotRandom(n , r, p , x ,range1, range2, k) ;
+
+        }
+
+      
+
+
+        for ( i = 0; i < n; i++ )
+        {
+          p[i] = r[i] + beta * p[i];
+        }
+
+        for ( i = 0; i < n; i++ )
+        {
+          p_prime[i] = r_prime[i] + beta * p_prime[i] ;
+        }
+
+        delete [] ap;
+        ap = r8ge_mv ( n, n, a, p );
+
+
+        delete [] s;
+        s = r8ge_mv(n , n , a, p) ;
+
+        delete [] s_prime ;
+        s_prime = r8vec_dot_product( n, A , p_prime) ;
+
+
+        //Alpha = (rn_prime^t * rn) / ( p_prime^t * sn )
+
+        alpha = r8vec_dot_product(n, r_prime , r) / r8vec_dot_product(n, p_prime, s) ;
+
+
+        // x = x + alpha* p
+
+        for ( i = 0; i < n; i++ )
+        {
+          x[i] = x[i] + alpha * p[i];
+        }
+
+        rr = r8vec_dot_product(n, r_prime , r) ;
+
+        for ( i = 0; i < n; i++ )
+        {
+           r[i] = r[i] - alpha * s[i];
+        }
+
+
+        for ( i = 0; i < n; i++ )
+        {
+           r_prime[i] = r_prime[i] - alpha * s_prime[i];
+        }
+
+
+        beta =  r8vec_dot_product(n, r_prime , r) / rr ;
+
+
+        if( isDetected (curIndicatorValue ))//, detector))
+        {
+
+
+          cerr << " Bit error detected, terminating application" << endl;
+          cout << " Bit error detected, terminating application" <<endl ;
+          cout << "*******************************************" << endl;
+
+          cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
+
+          //int& successful = Global::successfulRate ;
+
+          if( it - Global::pos <=10 && it - Global::pos >= 0)
+          {
+            //successful ++ ;
+            Global::successfulRate ++ ;
+          }
+
+          delete [] p;
+          delete [] p_prime;
+          delete [] r;
+          delete [] r_prime;
+
+          delete [] s;
+          delete [] s_prime;
+          
+          return ;
+
+        } 
+        else 
+        {
+
+          getIndicator( curIndicatorValue ) ;// ,detector) ;
+        }
+
+    }
+
+
+
+
+
+
+delete [] p;
+delete [] p_prime;
+delete [] r;
+delete [] r_prime;
+
+delete [] s;
+delete [] s_prime;
+
+return;
+
+
+
+
+
+}
+
+
 
 
 
@@ -7320,7 +7521,6 @@ bool isDetected( double curFunction )// , queue<double> & detector)
 {
 
   double& previous = Global::previousValueOfIndicator ;
-
   double diffIndicatorValue = curFunction - previous ;
 
   cout<<" Difference OF f function from previous f = "<<diffIndicatorValue<<endl; 
