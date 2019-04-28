@@ -4130,6 +4130,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 {
     double alpha;
     double *ap;
+
     double *s ;
     double *s_prime ;
 
@@ -4174,7 +4175,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
 
     //Choose ro_prime = r_0
-
+    r_prime = new double[n];
     for ( i = 0; i < n; i++ )
     {
       r_prime[i] = b[i] - ap[i];
@@ -4208,6 +4209,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
         if (it == Global::pos) 
         {
           injectBitFlipNotRandom(n , r, p , x ,range1, range2, k) ;
+          cout << " Bit Flip injection is done " << endl ;
         }
 
         for ( i = 0; i < n; i++ )
@@ -4280,6 +4282,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
           delete [] p;
           delete [] p_prime;
+
           delete [] r;
           delete [] r_prime;
 
@@ -4303,6 +4306,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
 delete [] p;
 delete [] p_prime;
+
 delete [] r;
 delete [] r_prime;
 
