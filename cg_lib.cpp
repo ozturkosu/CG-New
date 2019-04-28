@@ -4273,7 +4273,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
 
 
-        if( isDetected (curIndicatorValue ))//, detector))
+        if( isDetected (curIndicatorValue ) && it != 1)//, detector))
         {
 
 
