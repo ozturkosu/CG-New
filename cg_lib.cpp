@@ -4337,7 +4337,226 @@ return;
 
 
 
+void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int range2 , int k )
+{
+    double alpha;
+    double *ap;
 
+    double *s ;
+    double *s_prime ;
+
+    double *t ;
+
+    double beta ;
+    int i;
+    int it;
+
+    double *p;
+    double *p_prime;
+
+
+    double pap;
+    double pr;
+
+
+    double *r; //It takes it as parameter
+    double *r_prime;
+
+
+    double rap;
+    double rr;
+
+    double curIndicatorValue ;
+
+    cout << " Emin new bi-cg method is started " << endl ;
+
+    //  Initialize
+    //    AP = A * x,
+    //    R  = b - A * x,
+    //    P  = b - A * x.
+    //
+    ap = r8ge_mv ( n, n, a, x );
+    r = new double[n];
+
+    //r_0 = b- Ax0
+
+    for ( i = 0; i < n; i++ )
+    {
+      r[i] = b[i] - ap[i];
+    }
+
+
+    //Choose ro_prime = r_0
+    r_prime = new double[n];
+    for ( i = 0; i < n; i++ )
+    {
+      r_prime[i] = b[i] - ap[i];
+    }
+
+
+    t = new double[n] ;
+    for ( i = 0; i < n; ++i)
+    {
+        t[i] = 0;
+    }
+
+    //SET p_prime_0 = p_0 = 0 and beta = 0 ;
+
+    p = new double[n];
+    for ( i = 0; i < n; i++ )
+    {
+      p[i] = 0 ;
+    }
+
+
+    p_prime = new double[n];
+    for ( i = 0; i < n; i++ )
+    {
+      p_prime[i] = 0 ;
+    }
+
+    beta = 0;
+
+    s = r8ge_mv(n , n , a, x) ;
+    s_prime = r8ge_mv_TransposeA( n, n , a , p_prime) ;
+
+
+    for ( it = 0; i <=n ; it++)
+    {
+     
+        if (it == Global::pos) 
+        {
+          injectBitFlipNotRandom(n , r, p , x ,range1, range2, k) ;
+          cout << " Bit Flip injection is done " << endl ;
+        }
+
+        for ( i = 0; i < n; i++ )
+        {
+          p[i] = r[i] + beta * p[i];
+        }
+
+        for ( i = 0; i < n; i++ )
+        {
+          p_prime[i] = r_prime[i] + beta * p_prime[i] ;
+        }
+
+        delete [] ap;
+        ap = r8ge_mv ( n, n, a, p );
+
+
+        delete [] s;
+        s = r8ge_mv(n , n , a, p) ;
+
+        delete [] s_prime ;
+        s_prime = r8ge_mv_TransposeA( n, n , a , p_prime) ;
+
+
+        delete [] t ;
+        t = r8ge_mv(n , n , a, r) ;
+
+
+
+        //Alpha = (rn_prime^t * rn) / ( p_prime^t * sn )
+
+        alpha = r8vec_dot_product(n, r_prime , t) / r8vec_dot_product(n, s_prime, s) ;
+
+
+        // x = x + alpha* p
+
+        for ( i = 0; i < n; i++ )
+        {
+          x[i] = x[i] + alpha * p[i];
+        }
+
+        rr = r8vec_dot_product(n, r_prime , r) ;
+
+        for ( i = 0; i < n; i++ )
+        {
+           r[i] = r[i] - alpha * s[i];
+        }
+
+
+        for ( i = 0; i < n; i++ )
+        {
+           r_prime[i] = r_prime[i] - alpha * s_prime[i];
+        }
+
+
+        t = r8ge_mv(n , n , a, r) ;
+
+        beta =  r8vec_dot_product(n, r_prime , t) / rr ;
+
+
+          //Error Detection
+
+          curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
+
+          cout << "IndicatorFunction Value at i = " << it << endl;
+          cout << "CurIndicatorValue = " << curIndicatorValue  <<endl ;
+
+
+
+
+
+        if( isDetected (curIndicatorValue ) && it != 1)//, detector))
+        {
+
+
+          cerr << " Bit error detected, terminating application" << endl;
+          cout << " Bit error detected, terminating application" <<endl ;
+          cout << "*******************************************" << endl;
+
+          cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
+
+          //int& successful = Global::successfulRate ;
+
+          if( it - Global::pos <=10 && it - Global::pos >= 0)
+          {
+            //successful ++ ;
+            Global::successfulRate ++ ;
+          }
+
+
+          /*
+            delete [] p;
+            delete [] p_prime;
+
+            delete [] r;
+            delete [] r_prime;
+
+            delete [] s;
+            delete [] s_prime;
+
+            return ;
+
+          */
+        } 
+        else 
+        {
+          getIndicator( curIndicatorValue ) ;// ,detector) ;
+        }
+
+    }
+
+
+
+
+
+
+delete [] p;
+delete [] p_prime;
+
+delete [] r;
+delete [] r_prime;
+
+delete [] s;
+delete [] s_prime;
+
+return;
+
+
+
+}
 
 
 

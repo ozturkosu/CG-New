@@ -82,6 +82,7 @@ bool r8ge_cg_newAlphaImprovement_eminForRelativeError(int n , double a[] ,double
 void r8ge_cg_checkSum_emin2(int n ,  double a[] , double  b[] , double  x2[] , int  range1, int  range2, int k ) ;
 void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , int range1 , int range2 , int k)  ;
 void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int range2 , int k ) ;
+void r8ge_bcr_emin( m ,a , b , x2 , range1 , range2 , k) ; 
 void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1 , int range2 , int k);
 
 void getCurIndicatorValue( double x[], double r[] , double b[]) ;
@@ -140,7 +141,7 @@ class Global {
   static queue<double> eminDetector;
 };
 
-
+/*
 // in case of the compiler error - undefined references, please uncomment this
 int Global::MAX_ITER = 0;
 int Global::windowSize = 0;
