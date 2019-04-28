@@ -4291,17 +4291,20 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
             Global::successfulRate ++ ;
           }
 
-          delete [] p;
-          delete [] p_prime;
 
-          delete [] r;
-          delete [] r_prime;
+          /*
+            delete [] p;
+            delete [] p_prime;
 
-          delete [] s;
-          delete [] s_prime;
+            delete [] r;
+            delete [] r_prime;
 
-          return ;
+            delete [] s;
+            delete [] s_prime;
 
+            return ;
+
+          */
         } 
         else 
         {
