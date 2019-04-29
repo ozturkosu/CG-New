@@ -1278,7 +1278,7 @@ void r8ge_gbcg_start_withResidual(int windowSize, int psize, double threshold, i
 
 }
 
-void :q:r8ge_bcr_start_withIndicator(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k , std::string matrixname)
+void r8ge_bcr_start_withIndicator(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k , std::string matrixname)
 {
   double *a;
   double *b;
