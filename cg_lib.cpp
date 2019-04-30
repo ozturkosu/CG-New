@@ -4158,7 +4158,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
     double curIndicatorValue =0;
     double prevIndicatorValue =0;
 
-    double preResidual =0 ;
+    double preRes =0 ;
     double curRes=0;
 
     cout << " Emin new bi-cg method is started " << endl ;
@@ -4270,7 +4270,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
         //Error Detection
 
         prevIndicatorValue = curIndicatorValue;
-        preResidual= curRes ;
+        preRes= curRes ;
 
         curRes= r8vec_norm(n , r ) ;
         cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
@@ -4293,7 +4293,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
           cout << "Bit error detected residual is nan, terminating application" << endl;
 
         
-          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
+          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curIndicatorValue << endl;
 
          
           //int& successful = Global::successfulRate ;
@@ -4346,12 +4346,12 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
 
         }
-        else if( (abs(curProposedIndicator) - abs(prevProposedIndicator)) < abs(prevProposedIndicator)*1e+10  && it !=1)
+        else if( (abs(curIndicatorValue) - abs(prevIndicatorValue)) < abs(prevIndicatorValue)*1e+10  && it !=1)
         {
           cerr << "Bit error detected by proposed indicator, terminating application" << endl;
           cout << "Bit error detected by proposed indicator, terminating application" << endl;
 
-          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
+          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curIndicatorValue << endl;
 
           
 
