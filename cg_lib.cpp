@@ -4325,7 +4325,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
           cout << "Bit error detected by proposed indicator is inf, terminating application" << endl;
 
          
-          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
+          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curIndicatorValue << endl;
 
           if( it - Global::pos <=10 && it - Global::pos >= 0)
           {
