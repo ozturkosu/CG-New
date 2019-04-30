@@ -4158,7 +4158,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
     double curIndicatorValue =0;
     double prevIndicatorValue =0;
 
-    double preRes =0 ;
+    double prevRes =0 ;
     double curRes=0;
 
     cout << " Emin new bi-cg method is started " << endl ;
@@ -4270,7 +4270,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
         //Error Detection
 
         prevIndicatorValue = curIndicatorValue;
-        preRes= curRes ;
+        prevRes= curRes ;
 
         curRes= r8vec_norm(n , r ) ;
         cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
