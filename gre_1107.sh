@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --time=48:59:00
+#SBATCH --time=23:59:00
 mkdir BICGintoR60to63rangeNis200
 ./mainbcg 5 1107 200 60 63 0 gre_1107.mtx >> BICGintoR60to63rangeNis200/60to63result_gre_1107.txt
 mkdir BICGintoR60to63rangeNis400
