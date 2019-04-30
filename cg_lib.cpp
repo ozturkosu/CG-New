@@ -4305,7 +4305,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
           }
 
 
-          
+          /*
             delete [] p;
             delete [] p_prime;
 
@@ -4316,7 +4316,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
             delete [] s_prime;
 
             return ;
-
+          */
           
         } 
         else if( isnan(curRes) && it !=0 )
@@ -4333,6 +4333,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
                   Global::successfulRate ++ ;
               }
 
+          /*
             delete [] p;
             delete [] p_prime;
 
@@ -4343,7 +4344,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
             delete [] s_prime;
 
             return ;
-
+          */
 
         }
         else if( (abs(curIndicatorValue) - abs(prevIndicatorValue)) > abs(prevIndicatorValue)*1e+10  && it !=0)
@@ -4361,7 +4362,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
                   Global::successfulRate ++ ;
           }
 
-
+          /*
             delete [] p;
             delete [] p_prime;
 
@@ -4372,7 +4373,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
             delete [] s_prime;
 
             return ;
-       
+          */
 
         }
         else if(  (abs(curRes) - abs(prevRes)) < abs(prevRes)*1e+10  && it !=0)
@@ -4392,7 +4393,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
                   Global::successfulRate ++ ;
           }
 
-
+          /*
             delete [] p;
             delete [] p_prime;
 
@@ -4404,7 +4405,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
             return ;
        
-
+          */
         }
 
 
