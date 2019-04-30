@@ -4305,7 +4305,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
           }
 
 
-          /*
+          
             delete [] p;
             delete [] p_prime;
 
@@ -4316,9 +4316,65 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
             delete [] s_prime;
 
             return ;
-          */
+          
           
         } 
+         else if(isinf(abs(curIndicatorValue)))
+         {
+          cerr << "Bit error detected by proposed indicator is inf, terminating application" << endl;
+          cout << "Bit error detected by proposed indicator is inf, terminating application" << endl;
+
+         
+          cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
+
+          if( it - Global::pos <=10 && it - Global::pos >= 0)
+          {
+               //successful ++ ;
+                  Global::successfulRate ++ ;
+          }
+
+            
+            delete [] p;
+            delete [] p_prime;
+
+            delete [] r;
+            delete [] r_prime;
+
+            delete [] s;
+            delete [] s_prime;
+
+            return ;
+          
+
+        }
+        else if(isinf(abs(curRes)))
+         {
+          cerr << "Bit error detected by residual is inf, terminating application" << endl;
+          cout << "Bit error detected by residual is inf, terminating application" << endl;
+
+          cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
+         
+
+          if( it - Global::pos <=10 && it - Global::pos >= 0)
+          {
+               //successful ++ ;
+                  Global::successfulRate ++ ;
+          }
+
+            
+            delete [] p;
+            delete [] p_prime;
+
+            delete [] r;
+            delete [] r_prime;
+
+            delete [] s;
+            delete [] s_prime;
+
+            return ;
+          
+
+        }
         else if( isnan(curRes) && it !=0 )
         {
               cerr << "Bit error detected residual is nan, terminating application" << endl;
@@ -4333,7 +4389,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
                   Global::successfulRate ++ ;
               }
 
-          /*
+          
             delete [] p;
             delete [] p_prime;
 
@@ -4344,7 +4400,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
             delete [] s_prime;
 
             return ;
-          */
+          
 
         }
         else if( (abs(curIndicatorValue) - abs(prevIndicatorValue)) > abs(prevIndicatorValue)*1e+10  && it !=0)
@@ -4362,7 +4418,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
                   Global::successfulRate ++ ;
           }
 
-          /*
+          
             delete [] p;
             delete [] p_prime;
 
@@ -4373,15 +4429,15 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
             delete [] s_prime;
 
             return ;
-          */
+          
 
         }
-        else if(  (abs(curRes) - abs(prevRes)) < abs(prevRes)*1e+10  && it !=0)
+        else if(  (abs(curRes) - abs(prevRes)) > abs(prevRes)*1e+10  && it !=0)
         {
 
 
-          cerr << "Bit error detected residual is nan, terminating application" << endl;
-          cout << "Bit error detected residual is nan, terminating application" << endl;
+          cerr << "Bit error detected by residual , terminating application" << endl;
+          cout << "Bit error detected by residual , terminating application" << endl;
 
           cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
 
@@ -4393,7 +4449,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
                   Global::successfulRate ++ ;
           }
 
-          /*
+          
             delete [] p;
             delete [] p_prime;
 
@@ -4405,7 +4461,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
             return ;
        
-          */
+          
         }
 
 
