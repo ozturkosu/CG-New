@@ -71,8 +71,8 @@ int main (int argc, char** argv)
    
 
     //r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k ) ;
-    r8ge_gcr_start_withResidual ( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
-    //r8ge_bcg_start_withIndicator( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
+    //r8ge_gcr_start_withResidual ( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
+    r8ge_bcg_start_withIndicator( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
     //r8ge_bcr_start_withIndicator( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
   }
 
@@ -735,7 +735,7 @@ void r8ge_bcg_start_withIndicator(int windowSize, int psize, double threshold, i
   //r8ge_cg ( n, a, b, x2 );
 
 
-  //r8ge_cg_Indicator_version2( m ,a , b , x2 , range1 , range2 , k) ; 
+  
   r8ge_bcg_emin( m ,a , b , x2 , range1 , range2 , k) ; 
 
   cout << "\n";

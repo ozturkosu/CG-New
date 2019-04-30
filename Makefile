@@ -1,6 +1,6 @@
 LIBPATH=$(HOME)/codes/CG
 
-all: maingcr
+all: mainbcg
 
 cg_lib.o: cg_lib.cpp cg_lib.hpp
 	g++ -c -I/$(LIBPATH) cg_lib.cpp
@@ -12,11 +12,11 @@ main.o: main.cpp
 	#mpic++ -c -I/$(LIBPATH) main.cpp
 	#mv main.o $(LIBPATH)/main.o
 
-maingcr: cg_lib.o main.o
+mainbcg: cg_lib.o main.o
 	#g++ main.o $(LIBPATH)/cg_lib.o -lm -o main
-	g++ main.o cg_lib.o -lm -o maingcr
+	g++ main.o cg_lib.o -lm -o mainbcg
 	#mpic++ main.o cg_lib.o -lm -o main
 
 clean:
 	rm *.o
-	rm maingcr
+	rm mainbcg
