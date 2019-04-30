@@ -4286,7 +4286,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
 
 
-        if( isnan (curIndicatorValue ) && it != 1)//, detector))
+        if( isnan (curIndicatorValue ) && it != 0)//, detector))
         {
 
           cerr << "Bit error detected curIndicator is nan, terminating application" << endl;
@@ -4319,7 +4319,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
           
         } 
-        else if( isnan(curRes) && it !=1 )
+        else if( isnan(curRes) && it !=0 )
         {
               cerr << "Bit error detected residual is nan, terminating application" << endl;
               cout << "Bit error detected residual is nan, terminating application" << endl;
@@ -4346,7 +4346,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
 
         }
-        else if( (abs(curIndicatorValue) - abs(prevIndicatorValue)) > abs(prevIndicatorValue)*1e+10  && it !=1)
+        else if( (abs(curIndicatorValue) - abs(prevIndicatorValue)) > abs(prevIndicatorValue)*1e+10  && it !=0)
         {
           cerr << "Bit error detected by proposed indicator, terminating application" << endl;
           cout << "Bit error detected by proposed indicator, terminating application" << endl;
@@ -4375,7 +4375,7 @@ void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int 
        
 
         }
-        else if(  (abs(curRes) - abs(prevRes)) < abs(prevRes)*1e+10  && it !=1)
+        else if(  (abs(curRes) - abs(prevRes)) < abs(prevRes)*1e+10  && it !=0)
         {
 
 
