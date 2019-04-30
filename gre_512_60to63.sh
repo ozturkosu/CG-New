@@ -24,4 +24,3 @@ mkdir BICGintoX60to63rangeNis600
 ./mainbcg 5 512 300 60 63 2 gre_512.mtx >> BICGintoX60to63rangeNis600/60to63result_gre_512.txt
 mkdir BICGintoX60to63rangeNis800
 ./mainbcg 5 512 400 60 63 2 gre_512.mtx >> BICGintoX60to63rangeNis800/60to63result_gre_512.txt
-mkdir BICGintoR56to59rangeNis200
