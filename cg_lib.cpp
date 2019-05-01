@@ -4690,7 +4690,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
           
           
             delete [] p;
-            delete [] p_prime;s
+            delete [] p_prime;
 
             delete [] r;
             delete [] r_prime;
