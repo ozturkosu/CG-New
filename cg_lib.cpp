@@ -4676,12 +4676,11 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         if( (abs(curIndicatorValue) - abs(prevIndicatorValue)) > abs(prevIndicatorValue)*1e+10  && it !=0 )//, detector))
         {
 
-          cerr << "Bit error detected by Residual, terminating application" << endl;
-          cout << "Bit error detected by Residual, terminating application" << endl;
+          cerr << "Bit error detected by Proposed Indicator, terminating application" << endl;
+          cout << "Bit error detected by Proposed Indicator , terminating application" << endl;
 
           cout << "Norm of residual at current  ="<< it <<" ||Ax-b||_n = " <<  curRes << endl;
-          cout << "Norm of residual at previous ="<< it <<" ||Ax-b||_{n-1} = " <<  preResidual << endl;
-
+         
           if( it - Global::pos <=10 && it - Global::pos >= 0)
           {
                //successful ++ ;
@@ -4691,7 +4690,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
           
           
             delete [] p;
-            delete [] p_prime;
+            delete [] p_prime;s
 
             delete [] r;
             delete [] r_prime;
