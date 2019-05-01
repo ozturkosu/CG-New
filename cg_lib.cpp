@@ -4655,15 +4655,21 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
           //Error Detection
 
-        preResidual = curRes ;
-        prevProposedIndicator= curProposedIndicator ;
+        prevIndicatorValue = curIndicatorValue;
+        prevRes= curRes ;
 
         curRes= r8vec_norm(n , r ) ;
         cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
 
-        double curProposedIndicator = getCurIndicatorValue( x, r , b, n) ;
-        cout << "IndicatorFunction Value at i = " << it <<" CurIndicatir = "<< curProposedIndicator << endl;
-            
+
+
+        curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
+
+        cout << "IndicatorFunction Value at i = " << it << endl;
+        cout << "CurIndicatorValue = " << curIndicatorValue  <<endl ;
+
+
+
 
 
 
