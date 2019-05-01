@@ -4524,7 +4524,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
     double rap;
     double rr;
 
-    double curIndicatorValue ;
+   
 
     double curIndicatorValue = 0;
     double prevIndicatorValue = 0;
