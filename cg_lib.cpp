@@ -4669,12 +4669,12 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         //curIndicatorValue = getCurIndicatorValue( x, r_prime , b, n) ;
         curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
 
-        cout << "IndicatorFunction Value at i = " << it << endl;
-        cout << "CurIndicatorValue = " << curIndicatorValue  <<endl ;
+        //cout << "IndicatorFunction Value at i = " << it << endl;
+        //cout << "CurIndicatorValue = " << curIndicatorValue  <<endl ;
 
 
-        //cout << "Value of Alpha "<< it <<" alpha = " <<  alpha << endl;
-        //cout << "Value of Beta "<< it <<" beta = " <<  beta << endl;
+        cout << "Value of Alpha "<< it <<" alpha = " <<  alpha << endl;
+        cout << "Value of Beta "<< it <<" beta = " <<  beta << endl;
 
 
 
@@ -4684,7 +4684,8 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
           cerr << "Bit error detected by Proposed Indicator, terminating application" << endl;
           cout << "Bit error detected by Proposed Indicator , terminating application" << endl;
 
-          cout << "Norm of residual at current  ="<< it <<" ||Ax-b||_n = " <<  curRes << endl;
+          cout << "Proposed Indicator at current iter= "<< it <<" value =" <<  curIndicatorValue << endl;
+          cout << "Proposed Indicator at previous iter= "<< it-1 <<" value =" <<  curIndicatorValue << endl;
          
           if( it - Global::pos <=10 && it - Global::pos >= 0)
           {
@@ -4715,8 +4716,8 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
           cerr << "Bit error detected by residual , terminating application" << endl;
           cout << "Bit error detected by residual , terminating application" << endl;
 
-          cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
-
+          cout << "Norm of residual at current "<< it <<" ||Ax-b|| = " <<  curRes << endl;
+          cout << "Norm of residual at previous"<< it <<" ||Ax-b|| = " <<  prevRes << endl;
 
 
           if( it - Global::pos <=10 && it - Global::pos >= 0)

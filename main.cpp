@@ -63,7 +63,7 @@ int main (int argc, char** argv)
   cout << "******************************** \n";
   cout << "******************************** \n";
  
-  for (int i = 0; i < 1; ++i)
+  for (int i = 0; i < 100; ++i)
   {
     
     cout << "Number of Experience = " << i << endl ;
