@@ -4664,7 +4664,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         prevRes= curRes ;
 
         curRes= r8vec_norm(n , r ) ;
-        cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
+        //cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
 
         cout << "alpha*r^t * r " <<  it << " " << newIndicator <<endl ;
 
@@ -4672,11 +4672,11 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
 
         //cout << "IndicatorFunction Value at i = " << it << endl;
-        cout << "CurIndicatorValue at it = "<< it << " Value = " << curIndicatorValue  <<endl ;
+        //cout << "CurIndicatorValue at it = "<< it << " Value = " << curIndicatorValue  <<endl ;
 
 
-        cout << "Value of Alpha "<< it <<" alpha = " <<  alpha << endl;
-        cout << "Value of Beta "<< it <<" beta = " <<  beta << endl;
+        //cout << "Value of Alpha "<< it <<" alpha = " <<  alpha << endl;
+        //cout << "Value of Beta "<< it <<" beta = " <<  beta << endl;
 
         newValue = alpha / curRes ;
 
