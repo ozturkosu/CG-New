@@ -4592,7 +4592,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
      
         if (it == Global::pos) 
         {
-          injectBitFlipNotRandom(n , r, p , x , r_prime , p_prime , t,  range1, range2, k) ;
+          injectBitFlipNotRandom2(n , r, p , x , r_prime , p_prime , t,  range1, range2, k) ;
           cout << " Bit Flip injection is done " << endl ;
         }
 
