@@ -4512,7 +4512,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
     double *p;
     double *p_prime;
 
-    double detectionRange = 0.1*n;
+    double detectionRange = 0.2*n;
 
     double pap;
     double pr;
