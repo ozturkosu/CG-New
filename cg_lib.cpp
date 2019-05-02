@@ -4693,6 +4693,10 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
                //successful ++ ;
                   Global::successfulRate ++ ;
           }
+          else if(it - Global::pos < 0)
+          {
+                  Global::falsePositive++;
+          }
 
           
           
@@ -4726,6 +4730,10 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
                //successful ++ ;
                   Global::successfulRate ++ ;
           }
+          else if(it - Global::pos < 0)
+          {
+                  Global::falsePositive++;
+          }
 
           
             delete [] p;
@@ -4754,8 +4762,12 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
             if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
             {
-                   //successful ++ ;
+                  
                       Global::successfulRate ++ ;
+            }
+             else if(it - Global::pos < 0)
+            {
+                  Global::falsePositive++;
             }
 
              
@@ -4793,6 +4805,11 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
             //successful ++ ;
             Global::successfulRate ++ ;
           }
+          else if(it - Global::pos < 0)
+          {
+                  Global::falsePositive++;
+          }
+
 
 
           
@@ -4820,8 +4837,12 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
           if( it - Global::pos <= detectionRange && it - Global::pos >= 0)
           {
-               //successful ++ ;
+               
                   Global::successfulRate ++ ;
+          }
+          else if(it - Global::pos < 0)
+          {
+                  Global::falsePositive++;
           }
 
             

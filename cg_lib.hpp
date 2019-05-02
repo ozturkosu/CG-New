@@ -123,6 +123,7 @@ class Global {
   static int pos;
   static int successfulRate;
   static int undetectedNumber;
+  static int falsePositive;
   static int ImproveRate ;
   static int CheckSumImproveRate ;
   static double gTrend;
@@ -148,6 +149,7 @@ int Global::MAX_ITER = 0;
 int Global::windowSize = 0;
 int Global::successfulRate=0;
 int Global::undetectedNumber=0;
+int Global::falsePositive=0;
 int Global::ImproveRate = 0;
 int Global::CheckSumImproveRate = 0;
 queue<double> Global::window;

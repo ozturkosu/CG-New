@@ -92,6 +92,7 @@ int main (int argc, char** argv)
   //cout << "  Averae Relative Error "<<averageRelativeError<<endl ;
 
   cout << " Successful Rate = " << Global::successfulRate << " % " <<endl ; 
+  cout << " False Positive Rate = "<<Global::falsePositive <<" % " <<endl ;
   cout << " \n";
 
   timestamp ( );
