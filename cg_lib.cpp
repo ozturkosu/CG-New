@@ -4592,7 +4592,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
      
         if (it == Global::pos) 
         {
-          injectBitFlipNotRandom(n , r, p , x ,range1, range2, k) ;
+          injectBitFlipNotRandom(n , r, p , x , r_prime , p_prime , t,  range1, range2, k) ;
           cout << " Bit Flip injection is done " << endl ;
         }
 
@@ -7592,16 +7592,21 @@ void injectBitflip ( int n, double a[], double x[], double b[] )
 
 // Implemented by Emin
 
-void injectBitFlipNotRandom( int n , double r[] , double p[] , double x[] ,  int range1, int range2 , int k)
+void injectBitFlipNotRandom( int n , double r[] , double p[] , double x[] , double r_prime[] , double p_prime[] , double t[] ,
+  int range1, int range2 , int k)
 {
 
   //Written By Emin
 
-  double ** badpointer = new double* [3] ;
+  double ** badpointer = new double* [6] ;
 
   badpointer[0] = r ;
   badpointer[1] = p ;
   badpointer[2] = x ;
+  badpointer[3] = r_prime ;
+  badpointer[4] = p_prime ;
+  badpointer[5] = t;
+
 
   srand (time(NULL)) ;
 
@@ -7613,17 +7618,31 @@ void injectBitFlipNotRandom( int n , double r[] , double p[] , double x[] ,  int
   int dim2 = rand() % n ;
 
   if(k == 0)
+  {
     cout << " flipping in r "<<dim2<< endl ;
+  }
   else if (k==1)
   {
-    /* code */
     cout<< " flipping in p "<<dim2<<endl ;
   }
   else if (k==2)
   {
-    /* code */
     cout<< " flipping in x"<<dim2<<endl ;
   }
+  else if (k==3)
+  {
+    cout<< " flipping in r_prime"<<dim2<<endl ;
+  }
+  else if (k==4)
+  {
+    cout<< " flipping in p_prime"<<dim2<<endl ;
+  }
+  else if (k==5)
+  {
+    cout<< " flipping in t"<<dim2<<endl ;
+  }
+
+
 
   BitFlip::randomFlip(&badpointer[dim1][dim2],  range1 ,  range2) ;
 

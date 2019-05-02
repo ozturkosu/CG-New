@@ -97,7 +97,7 @@ bool checkSumImpMethod( int n , double a[] ,double x[] , double b[]) ;
 double getResidual ( int m, int n, double a[], double x[], double b[] );
 double getFunctionIndicatorCunverge ( int n, double x[] , double b[] ) ;
 void injectBitflip ( int n, double a[], double x[], double b[] );
-void injectBitFlipNotRandom( int n , double a[] , double x[] , double b[] ,  int range1 , int range2 , int k );
+void injectBitFlipNotRandom( int n , double r[] , double p[] , double x[] , double r_prime[] , double p_prime[] , double t[], int range1 , int range2 , int k );
 void init ( int iter, int winSize, double thres, int flipPosition);
 void finish ();
 bool isFlipped ( double curRes );
@@ -141,7 +141,7 @@ class Global {
   static queue<double> eminDetector;
 };
 
-
+/*
 // in case of the compiler error - undefined references, please uncomment this
 int Global::MAX_ITER = 0;
 int Global::windowSize = 0;
