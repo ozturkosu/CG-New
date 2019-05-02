@@ -4688,10 +4688,11 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
           cerr << "Bit error detected by Proposed Indicator, terminating application" << endl;
           cout << "Bit error detected by Proposed Indicator , terminating application" << endl;
 
-          cout << "Proposed Indicator at current iter= "<< it <<" value =" <<  curIndicatorValue << endl;
-          cout << "Proposed Indicator at previous iter= "<< it-1 <<" value =" <<  curIndicatorValue << endl;
+          cout << "Proposed Indicator at current iter= "<< it <<" value = " <<  curIndicatorValue << endl;
+          cout << "Proposed Indicator at previous iter= "<< it-1 <<" value = " <<  prevIndicatorValue<< endl;
          
-          if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
+          //if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
+          if( it - Global::pos >= 0 )
           {
                
                   Global::successfulRate ++ ;
@@ -4728,7 +4729,8 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
           cout << "Norm of residual at previous"<< it <<" ||Ax-b|| = " <<  prevRes << endl;
 
 
-          if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
+          //.if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
+          if( it - Global::pos >= 0 )
           {
                   Global::successfulRate ++ ;
           }
@@ -4762,7 +4764,8 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
             cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
            
 
-            if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
+           // if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
+            if( it - Global::pos >= 0 )
             {   
                   Global::successfulRate ++ ;
             }
@@ -4801,7 +4804,8 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
          
           //int& successful = Global::successfulRate ;
 
-          if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
+          //if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
+          if( it - Global::pos >= 0 )
           {
                   Global::successfulRate ++ ;
           }
@@ -4835,7 +4839,8 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
           cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
          
 
-          if( it - Global::pos <= detectionRange && it - Global::pos >= 0)
+          //if( it - Global::pos <= detectionRange && it - Global::pos >= 0)
+          if( it - Global::pos >= 0 )
           {      
                   Global::successfulRate ++ ;
           }
