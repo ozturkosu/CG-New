@@ -4671,7 +4671,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
 
         //cout << "IndicatorFunction Value at i = " << it << endl;
-        //cout << "CurIndicatorValue = " << curIndicatorValue  <<endl ;
+        cout << "CurIndicatorValue at it = "<< it << " Value = " << curIndicatorValue  <<endl ;
 
 
         cout << "Value of Alpha "<< it <<" alpha = " <<  alpha << endl;
@@ -4715,7 +4715,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
           
           
         } 
-        else if ( (abs(curRes) - abs(prevRes)) > abs(prevRes)*1e+1  && it !=0 )
+        else if ( (abs(curRes) - abs(prevRes)) > abs(prevRes)*1e+10  && it !=0 )
         {
           
           cerr << "Bit error detected by residual , terminating application" << endl;
@@ -4727,7 +4727,6 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
           if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
           {
-               //successful ++ ;
                   Global::successfulRate ++ ;
           }
           else if(it - Global::pos < 0)
@@ -4761,9 +4760,8 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
            
 
             if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
-            {
-                  
-                      Global::successfulRate ++ ;
+            {   
+                  Global::successfulRate ++ ;
             }
              else if(it - Global::pos < 0)
             {
@@ -4802,8 +4800,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
           if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
           {
-            //successful ++ ;
-            Global::successfulRate ++ ;
+                  Global::successfulRate ++ ;
           }
           else if(it - Global::pos < 0)
           {
@@ -4836,8 +4833,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
          
 
           if( it - Global::pos <= detectionRange && it - Global::pos >= 0)
-          {
-               
+          {      
                   Global::successfulRate ++ ;
           }
           else if(it - Global::pos < 0)
