@@ -4663,7 +4663,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
 
 
 
-        curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
+        curIndicatorValue = getCurIndicatorValue( x, r_prime , b, n) ;
 
         cout << "IndicatorFunction Value at i = " << it << endl;
         cout << "CurIndicatorValue = " << curIndicatorValue  <<endl ;
