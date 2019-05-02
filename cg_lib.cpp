@@ -4525,6 +4525,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
     double rap;
     double rr;
 
+    double newValue=0;
    
 
     double curIndicatorValue = 0;
@@ -4677,9 +4678,11 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         cout << "Value of Alpha "<< it <<" alpha = " <<  alpha << endl;
         cout << "Value of Beta "<< it <<" beta = " <<  beta << endl;
 
+        newValue = alpha / curRes ;
 
+        cout << "New Value at iteration= "<< it <<" New Value =  " <<  newValue << endl;
 
-        if( (abs(curIndicatorValue) - abs(prevIndicatorValue)) > abs(prevIndicatorValue)*1e+10  && it !=0 )//, detector))
+        if( (abs(curIndicatorValue) - abs(prevIndicatorValue)) > abs(prevIndicatorValue)*1e+2  && it !=0 )//, detector))
         {
 
           cerr << "Bit error detected by Proposed Indicator, terminating application" << endl;
@@ -4690,7 +4693,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
          
           if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
           {
-               //successful ++ ;
+               
                   Global::successfulRate ++ ;
           }
           else if(it - Global::pos < 0)
@@ -4715,7 +4718,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
           
           
         } 
-        else if ( (abs(curRes) - abs(prevRes)) > abs(prevRes)*1e+10  && it !=0 )
+        else if ( (abs(curRes) - abs(prevRes)) > abs(prevRes)*1e+5  && it !=0 )
         {
           
           cerr << "Bit error detected by residual , terminating application" << endl;
