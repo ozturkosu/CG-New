@@ -4532,7 +4532,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
     double prevRes =0 ;
     double curRes=0;
 
-
+    double newIndicator;
 
     cout << " Emin new bi-cg method is started " << endl ;
 
@@ -4621,10 +4621,13 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         t = r8ge_mv(n , n , a, r) ;
 
 
+       
 
         //Alpha = (rn_prime^t * rn) / ( p_prime^t * sn )
 
         alpha = r8vec_dot_product(n, r_prime , t) / r8vec_dot_product(n, s_prime, s) ;
+          
+        newIndicator = r8vec_dot_product(n, r , r) * alpha ;
 
 
         // x = x + alpha* p
@@ -4661,7 +4664,7 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         curRes= r8vec_norm(n , r ) ;
         cout << "Norm of residual at it "<< it <<" ||Ax-b|| = " <<  curRes << endl;
 
-
+        cout << "alpha*r^t * r " <<  it << " " << newIndicator <<endl ;
 
         //curIndicatorValue = getCurIndicatorValue( x, r_prime , b, n) ;
         curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
@@ -4670,8 +4673,8 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         cout << "CurIndicatorValue = " << curIndicatorValue  <<endl ;
 
 
-        cout << "Value of Alpha "<< it <<" alpha = " <<  alpha << endl;
-        cout << "Value of Beta "<< it <<" beta = " <<  beta << endl;
+        //cout << "Value of Alpha "<< it <<" alpha = " <<  alpha << endl;
+        //cout << "Value of Beta "<< it <<" beta = " <<  beta << endl;
 
 
 
