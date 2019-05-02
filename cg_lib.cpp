@@ -4670,7 +4670,8 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         cout << "CurIndicatorValue = " << curIndicatorValue  <<endl ;
 
 
-
+        cout << "Value of Alpha "<< it <<" alpha = " <<  alpha << endl;
+        cout << "Value of Beta "<< it <<" beta = " <<  beta << endl;
 
 
 
