@@ -7592,7 +7592,53 @@ void injectBitflip ( int n, double a[], double x[], double b[] )
 
 // Implemented by Emin
 
-void injectBitFlipNotRandom( int n , double r[] , double p[] , double x[] , double r_prime[] , double p_prime[] , double t[] ,
+void injectBitFlipNotRandom( int n , double r[] , double p[] , double x[] , 
+  int range1, int range2 , int k)
+{
+
+  //Written By Emin
+
+  double ** badpointer = new double* [6] ;
+
+  badpointer[0] = r ;
+  badpointer[1] = p ;
+  badpointer[2] = x ;
+ 
+  srand (time(NULL)) ;
+
+  int dim1 = k ;
+
+  // Emin Question = n  
+  
+
+  int dim2 = rand() % n ;
+
+  if(k == 0)
+  {
+    cout << " flipping in r "<<dim2<< endl ;
+  }
+  else if (k==1)
+  {
+    cout<< " flipping in p "<<dim2<<endl ;
+  }
+  else if (k==2)
+  {
+    cout<< " flipping in x"<<dim2<<endl ;
+  }
+ 
+
+
+
+  BitFlip::randomFlip(&badpointer[dim1][dim2],  range1 ,  range2) ;
+
+  delete [] badpointer;
+
+}
+
+
+
+
+void injectBitFlipNotRandom2( int n , double r[] , double p[] , double x[] , double r_prime[] , double p_prime[] , double t[] ,
   int range1, int range2 , int k)
 {
 
