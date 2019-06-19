@@ -1,4 +1,5 @@
 #!/bin/bash
+#SBATCH --time=23:59:00
 mkdir CRintoR60to63rangeNis200
 ./main2 5 420 84 60 63 0 bcsstk06.mtx >> CRintoR60to63rangeNis200/residual60to63result_bcsstk06.txt
 mkdir CRintoR60to63rangeNis400

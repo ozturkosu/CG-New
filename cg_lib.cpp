@@ -4534,7 +4534,8 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
     double prevRes =0 ;
     double curRes=0;
 
-    double newIndicator;
+    double newIndicator = 0 ;
+    double prev_newValue = 0 ;
 
     cout << " Emin new bi-cr method is started " << endl ;
 
@@ -4678,11 +4679,47 @@ void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int 
         //cout << "Value of Alpha "<< it <<" alpha = " <<  alpha << endl;
         //cout << "Value of Beta "<< it <<" beta = " <<  beta << endl;
 
+        prev_newValue = newValue;
         newValue = alpha / curRes ;
 
         cout << "New Value at iteration= "<< it <<" New Value =  " <<  newValue << endl;
 
-        if( (abs(curIndicatorValue) - abs(prevIndicatorValue)) > abs(prevIndicatorValue)*1e+2  && it !=0 )//, detector))
+        if (  abs(newValue) - abs(prev_newValue)  > abs(prev_newValue) * 1e+2 && it != 0   )
+        {
+          cerr << "Bit error detected by Proposed Indicator, terminating application" << endl;
+          cout << "Bit error detected by Proposed Indicator , terminating application" << endl;
+
+          cout << "Proposed Indicator at current iter= "<< it <<" value = " <<  curIndicatorValue << endl;
+          cout << "Proposed Indicator at previous iter= "<< it-1 <<" value = " <<  prevIndicatorValue<< endl;
+         
+          //if( it - Global::pos <=detectionRange && it - Global::pos >= 0)
+          if( it - Global::pos >= 0 )
+          {
+               
+                  Global::successfulRate ++ ;
+          }
+          else if(it - Global::pos < 0)
+          {
+                  Global::falsePositive++;
+          }
+
+          
+          
+            delete [] p;
+            delete [] p_prime;
+
+            delete [] r;
+            delete [] r_prime;
+
+            delete [] s;
+            delete [] s_prime;
+
+            delete [] t;
+
+            return ;
+
+        }
+        else if( (abs(curIndicatorValue) - abs(prevIndicatorValue)) > abs(prevIndicatorValue)*1e+2  && it !=0 )//, detector))
         {
 
           cerr << "Bit error detected by Proposed Indicator, terminating application" << endl;
