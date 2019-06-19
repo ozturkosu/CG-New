@@ -12,7 +12,7 @@ main.o: main.cpp
 	#mpic++ -c -I/$(LIBPATH) main.cpp
 	#mv main.o $(LIBPATH)/main.o
 
-mainbcr: cg_lib.o main.o
+maincr1: cg_lib.o main.o
 	#g++ main.o $(LIBPATH)/cg_lib.o -lm -o main
 	g++ main.o cg_lib.o -lm -o maincr1
 	#mpic++ main.o cg_lib.o -lm -o main
