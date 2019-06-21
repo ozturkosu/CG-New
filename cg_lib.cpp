@@ -3829,7 +3829,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
       
       
 
-       if (curRes > preResidual && it != 1 ) 
+       if (curRes - preResidual > preResidual*0.1 && it != 1 ) 
        {
 
           cerr << "Bit error detected by Residual, terminating application" << endl;
