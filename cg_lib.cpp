@@ -3873,7 +3873,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
 
        }
-       else if(abs(curProposedIndicator) - abs(prevProposedIndicator) != 0 && it !=1)
+       else if(abs(curProposedIndicator) - abs(prevProposedIndicator) < 0 && it !=1)
        {
           cerr << "Bit error detected by proposed indicator, terminating application" << endl;
           cout << "Bit error detected by proposed indicator, terminating application" << endl;
