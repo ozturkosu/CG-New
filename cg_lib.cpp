@@ -4155,7 +4155,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
         delete [] p;
         delete [] r;
        
-        return 
+        return ;
 
       }
 
