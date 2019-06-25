@@ -471,6 +471,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 //
 
   int m=n;
+  int ni=n;
 
   x1 = r8vec_uniform_01_new ( m, seed );
 //
