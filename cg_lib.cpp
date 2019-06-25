@@ -3953,7 +3953,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
 
 
-void nr8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , int range1 , int range2 , int k)  
+void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , int range1 , int range2 , int k)  
 {
   double alpha;
   double *ap;
