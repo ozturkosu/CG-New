@@ -4085,7 +4085,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
       //Global::previousValueOfIndicator = newIndicator ;
 
-      if( (abs(newIndicator) - abs(prevnewIndicator)) > abs(prevnewIndicator)*1e+10  && it !=0)//, detector))
+      if( (abs(newIndicator) - abs(prevnewIndicator)) > abs(prevnewIndicator)*1e+10  && it !=1)//, detector))
       {
      
         cerr << " Bit error detected, terminating application" << endl;
@@ -4158,6 +4158,8 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
         return ;
 
       }
+
+      prevnewIndicator = newIndicator ;
 
   }
 
