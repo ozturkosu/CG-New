@@ -4081,9 +4081,16 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       
       cout << " new indicator at i "<< it << " NewIndicator= " << newIndicator <<endl; 
 
-      //getIndicator( newIndicator ) ;
+      curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
 
-      //Global::previousValueOfIndicator = newIndicator ;
+      if ( it == 1)
+      {
+        /* code */
+        Global::previousValueOfIndicator = curIndicatorValue ;
+      }
+
+      
+      cout << "CurProposedIndicatorValue = " << curIndicatorValue  <<endl ;
 
       if( (abs(newIndicator) - abs(prevnewIndicator)) > abs(prevnewIndicator)*1e+10  && it !=1)//, detector))
       {
@@ -4150,12 +4157,48 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
           Global::successfulRate ++ ;
         }
 
+
+
         //exit(-1);
 
         delete [] p;
         delete [] r;
        
         return ;
+
+      }
+      else if (improveMethod( curIndicatorValue))
+      {
+        
+        /* code */
+
+        /* code */
+        cerr << " Bit error detected, terminating application for improveMethod" << endl;
+        cout << " Bit error detected, terminating application for improveMethod" <<endl ;
+        cout << "*******************************************" << endl;
+
+        cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
+
+        //int& successful = Global::successfulRate ;
+
+        if( it - Global::pos <=10 && it - Global::pos >= 0)
+        {
+          //successful ++ ;
+          Global::successfulRate ++ ;
+        }
+
+        //exit(-1);
+
+        delete [] p;
+        delete [] r;
+        //detector.pop();
+        //detector.pop();
+        //delete detector;
+
+      
+        return ;
+
+
 
       }
 
