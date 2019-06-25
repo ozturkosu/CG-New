@@ -8148,7 +8148,7 @@ bool improveMethod(double curFunct)
 
     cout<<" Difference OF f function from previous f = "<<diffIndicatorValue<<endl; 
 
-    if ( diffIndicatorValue > 0 && diffIndicatorValue >= previous*1e-13*-1 )
+    if ( diffIndicatorValue > 0 && diffIndicatorValue >= previous*1e1*-1 )
     {
       /* code */
       cout<<" Error detected by fn increase"<<endl ;
