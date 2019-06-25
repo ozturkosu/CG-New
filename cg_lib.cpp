@@ -4167,7 +4167,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
         return ;
 
       }
-      else if (improveMethod( curIndicatorValue))
+      else if (improveMethod( curIndicatorValue) && it > 10)
       {
         
         /* code */
