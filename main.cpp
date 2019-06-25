@@ -70,7 +70,11 @@ int main (int argc, char** argv)
     cout << "SuccessfulRate = " << Global::successfulRate << " % " <<endl ;
    
 
+  
     r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname) ;
+
+
+
     //r8ge_gcr_start_withResidual ( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
     //r8ge_bcg_start_withIndicator( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
     //r8ge_bcr_start_withIndicator( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
@@ -392,7 +396,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   
   cout << "\n";
   cout << "R8GE_CG_TEST\n";
-  cout << "  R8GE_CG applies CG to a full storage matrix.\n";
+  cout << "  R8GE_CG applies CG to a full storage matrix Default Matirx.\n";
 
 
    n = psize;
@@ -402,11 +406,13 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   srand (time(NULL));
   seed = rand();
 
-  //a = pds_random ( n, seed ); // pds is returning random positive definite symmetric matrix
+
+  a = pds_random ( n, seed ); // pds is returning random positive definite symmetric matrix
 
 
   //Read Matrix from file // Added Emin at March 6
-  
+  /*
+
   char nameOfMatrix[matrixname.size() +1] ;
   strcpy(nameOfMatrix , matrixname.c_str()) ;
 
@@ -439,7 +445,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 
   for (int i = 0; i < l; ++i)
   {
-    /* code */
+  
     matrixfile >> I[i] >> J[i] >> val[i] ;
     xi = I[i] -1 ;
     yi = J[i] -1 ;
@@ -457,7 +463,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 
 
   cout << " Matrix A is filled from file"<<endl ;
-
+  */
 
 
 //
