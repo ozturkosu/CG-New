@@ -4134,7 +4134,7 @@ void nr8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , 
         //return ;
 
       }
-      else if(isnan(NewIndicator))
+      else if(isnan(newIndicator))
       {
         cerr << " Bit error detected, terminating application" << endl;
         cout << " Bit error detected, terminating application" <<endl ;
