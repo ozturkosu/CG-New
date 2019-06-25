@@ -469,6 +469,9 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 //
 //  Choose a random solution.
 //
+
+  int m=n;
+
   x1 = r8vec_uniform_01_new ( m, seed );
 //
 //  Compute the corresponding right hand side.
