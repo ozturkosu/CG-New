@@ -8164,9 +8164,10 @@ bool improveMethod(double curFunct)
     
     previous = curFunct ;
 
+    /*
     if ( diffs.size() == 0)
     {
-      /* code */
+      
       diffs.push(difference) ;
       gTdifference = gTdifference + difference ;
       cout << " gTdifference = "<<gTdifference<<endl ;
@@ -8174,7 +8175,7 @@ bool improveMethod(double curFunct)
     }
     else if ( diffs.size() < size)
     {
-      /* code */
+      
       diffs.push(difference) ;
       gTdifference = gTdifference + difference ;
       cout << " gTdifference = "<<gTdifference<<endl ;
@@ -8187,7 +8188,7 @@ bool improveMethod(double curFunct)
 
       if ( difference > k )
       {
-        /* code */
+        
         cout << " difference   = "<<difference<<endl ;
         cout << " gTdifference = "<<gTdifference<<endl ;
         cout << " Error detected by improve"<<endl ;
@@ -8202,9 +8203,10 @@ bool improveMethod(double curFunct)
         return false;
 
       }
-
+   
 
     }
+     */
 
     //delete 
     return false;
