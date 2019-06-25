@@ -3953,7 +3953,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
 
 
-void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , int range1 , int range2 , int k)  
+void nr8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , int range1 , int range2 , int k)  
 {
   double alpha;
   double *ap;
@@ -3969,6 +3969,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
   double curIndicatorValue ; 
 
   double newIndicator;
+  double prevnewIndicator;
 
   cout << " Detection by  Indicator_version2 Method fn_new = alpha * r^T * r to detect soft error  " <<endl ;
   cout << "" <<endl ;
@@ -4084,7 +4085,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
       //Global::previousValueOfIndicator = newIndicator ;
 
-      if( isDetected(newIndicator) && it != 1)//, detector))
+      if( (abs(newIndicator) - abs(prevnewIndicator)) > abs(prevnewIndicator)*1e+10  && it !=0)//, detector))
       {
      
         cerr << " Bit error detected, terminating application" << endl;
@@ -4109,10 +4110,53 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
         //return ;
 
       } 
-      else 
+      else if(isinf(newIndicator))
       {
-        //recordIndicator(curIndicatorValue);
-        getIndicator(newIndicator) ;// ,detector) ;
+        cerr << " Bit error detected, terminating application" << endl;
+        cout << " Bit error detected, terminating application" <<endl ;
+        cout << "*******************************************" << endl;
+
+        //cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
+
+        //int& successful = Global::successfulRate ;
+
+        if( it - Global::pos <=10 && it - Global::pos >= 0)
+        {
+          //successful ++ ;
+          Global::successfulRate ++ ;
+        }
+
+        //exit(-1);
+
+        //delete [] p;
+        //delete [] r;
+       
+        //return ;
+
+      }
+      else if(isnan(NewIndicator))
+      {
+        cerr << " Bit error detected, terminating application" << endl;
+        cout << " Bit error detected, terminating application" <<endl ;
+        cout << "*******************************************" << endl;
+
+        //cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
+
+        //int& successful = Global::successfulRate ;
+
+        if( it - Global::pos <=10 && it - Global::pos >= 0)
+        {
+          //successful ++ ;
+          Global::successfulRate ++ ;
+        }
+
+        //exit(-1);
+
+        //delete [] p;
+        //delete [] r;
+       
+        //return 
+
       }
 
   }
