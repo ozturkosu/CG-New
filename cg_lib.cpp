@@ -8161,6 +8161,12 @@ bool improveMethod(double curFunct)
       return true;
 
     }
+     if( isinf(curFunct))
+    {
+      cout<<" Error detected by fn = inf"<<endl ;
+      return true;
+
+    }
     
     previous = curFunct ;
 
