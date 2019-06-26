@@ -4092,7 +4092,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       
       cout << "CurProposedIndicatorValue = " << curIndicatorValue  <<endl ;
 
-      if( (abs(newIndicator) - abs(prevnewIndicator)) > abs(prevnewIndicator)*1e+10  && it !=1)//, detector))
+      if( (abs(newIndicator) - abs(prevnewIndicator)) > abs(prevnewIndicator)*1e+4  && it !=1)//, detector))
       {
      
         cerr << " Bit error detected by newIndicator, terminating application" << endl;
@@ -4167,7 +4167,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
         return ;
 
       }
-      /*
+      
       else if (improveMethod( curIndicatorValue) && it > 10)
       {
         
@@ -4200,7 +4200,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
 
       }
-      */
+      
 
       prevnewIndicator = newIndicator ;
 
