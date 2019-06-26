@@ -92,7 +92,7 @@ int main (int argc, char** argv)
   //int succesfulrateForImprovement = Global::successfulRate ;
   //double unsuccesful = Global::undetectedNumber ;
 
-  averageRelativeError = averageRelativeError / (100 - succesfulrate) ;
+  averageRelativeError = averageRelativeError / (100 - Global::succesfulrate) ;
      
 //
 //  Terminate.
@@ -551,7 +551,66 @@ double *a;
 //
   srand (time(NULL));
   seed = rand();
-  a = pds_random ( n, seed );
+  //a = pds_random ( n, seed );
+
+
+   //Read Matrix from file // Added Emin at March 6
+  
+
+  char nameOfMatrix[matrixname.size() +1] ;
+  strcpy(nameOfMatrix , matrixname.c_str()) ;
+
+  ifstream matrixfile(nameOfMatrix);
+  if(!(matrixfile.is_open())){
+      cout << "Error : file not found " <<endl;
+      return;
+  }
+  int m,ni,l;
+  while(matrixfile.peek()=='%') matrixfile.ignore(2048, '\n');
+  matrixfile>>m>>ni>>l ;
+
+
+
+  cout << " m = "<<m<<endl ;
+  cout << " n = "<<ni<<endl ;
+  cout << " l = "<<l<<endl ;
+
+  a = new double[m*ni] ;
+  std::fill(a , a + m * ni , 0.) ;
+
+  double *I, *J;
+  double *val ;
+
+  I = new double[l] ;
+  J = new double[l] ;
+  val = new double[l] ;
+
+  int xi , yi ;
+
+  for (int i = 0; i < l; ++i)
+  {
+  
+    matrixfile >> I[i] >> J[i] >> val[i] ;
+    xi = I[i] -1 ;
+    yi = J[i] -1 ;
+
+    a[xi * m + yi] = val[i] ;
+
+    //cout << " i = " << i << endl ;
+    //cout << "a[x][y] "<< a[xi * m + yi] <<endl ;
+    //cout << " I[i] = " <<I[i] <<" J[i] = " << J[i] << endl ;
+
+
+  }
+  
+  matrixfile.close() ;
+
+
+  cout << " Matrix A is filled from file"<<endl ;
+
+
+
+
 //
 //  Choose a random solution.
 //
