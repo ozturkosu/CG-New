@@ -92,7 +92,7 @@ int main (int argc, char** argv)
   //int succesfulrateForImprovement = Global::successfulRate ;
   //double unsuccesful = Global::undetectedNumber ;
 
-  averageRelativeError = averageRelativeError / (100 - Global::succesfulrate) ;
+  averageRelativeError = averageRelativeError / (100 - Global::successfulRate) ;
      
 //
 //  Terminate.
