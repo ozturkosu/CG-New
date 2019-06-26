@@ -21,8 +21,13 @@ void r8ge_cg_start_withImprovement (int windowSize, int psize, double threshold,
 void r8ge_cg_start_withCheckSum (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
 void r8ge_cg_start_withAlphaDetection (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
 double r8ge_cg_start_withAlphaDetectionAndRelativeErrors(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
+
 void  r8ge_cg_start_withNewIndicator(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k , std::string matrixname) ;
+
+double r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k , std::string matrixname) ;
+
 void r8ge_cr_start_withResidual(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
+
 void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k, std::string matrixname);
 void r8ge_gbcg_start_withResidual(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k, std::string matrixname);
 void r8ge_bcg_start_withIndicator(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k , std::string matrixname);
@@ -62,6 +67,9 @@ int main (int argc, char** argv)
   cout << " \n";
   cout << "******************************** \n";
   cout << "******************************** \n";
+
+  double sum=0;
+  double averageRelativeError=0;
  
   for (int i = 0; i < 100; ++i)
   {
@@ -71,8 +79,9 @@ int main (int argc, char** argv)
    
 
   
-    r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname) ;
+    //r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname) ;
 
+    sum = sum + r8ge_cg_start_withNewIndicatorRelativeErrors(windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname) ;
 
 
     //r8ge_gcr_start_withResidual ( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
@@ -83,7 +92,7 @@ int main (int argc, char** argv)
   //int succesfulrateForImprovement = Global::successfulRate ;
   //double unsuccesful = Global::undetectedNumber ;
 
-  //averageRelativeError = averageRelativeError / unsuccesful ;
+  averageRelativeError = averageRelativeError / (100 - succesfulrate) ;
      
 //
 //  Terminate.
@@ -93,7 +102,7 @@ int main (int argc, char** argv)
   cout << "  Normal end of execution.\n";
   //cout << "  successfulRate for fn indicator"<<succesfulrateForIndicator<<  endl;
   //cout << "  SuccessfulRate for fn with improvement "<< succesfulrateForImprovement <<endl ;
-  //cout << "  Averae Relative Error "<<averageRelativeError<<endl ;
+  cout << "  Averae Relative Error "<<averageRelativeError<<endl ;
 
   cout << " Successful Rate = " << Global::successfulRate << " % " <<endl ; 
   cout << " False Positive Rate = "<<Global::falsePositive <<" % " <<endl ;
@@ -504,6 +513,126 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   return;
 
 }
+
+
+double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k , std::string matrixname) 
+{
+
+
+double *a;
+  double *b;
+
+  double e_norm;
+  int i;
+  int n;
+  //double *r;
+
+ // double r_norm;
+  int seed;
+
+  double *x1;
+  double *x2;
+
+  int winSize = windowSize;
+  double thres = threshold;
+  int flipPosition = fPos;
+  
+  cout << "\n";
+  cout << "R8GE_CG_TEST\n";
+  cout << "  R8GE_CG applies CG to a full storage matrix.\n";
+
+  //cout << " Number of "
+
+
+
+  n = psize;
+//
+//  Let A be the -1 2 -1 matrix.
+//
+  srand (time(NULL));
+  seed = rand();
+  a = pds_random ( n, seed );
+//
+//  Choose a random solution.
+//
+  x1 = r8vec_uniform_01_new ( n, seed );
+//
+//  Compute the corresponding right hand side.
+//
+  b = r8ge_mv ( n, n, a, x1 );
+//
+//  Call the CG routine.
+//
+  x2 = new double[n];
+  for ( i = 0; i < n; i++ )
+  {
+    x2[i] = 1.0;
+  }
+  init (n, winSize, thres, flipPosition);
+
+  //r8ge_cg ( n, a, b, x2 );
+
+  //r8ge_cg_emin( n ,a , b , x2 , range1 , range2 , k) ; 
+  //r8ge_cg_newIndicatior_emin(n , a , b , x2 , range1 , range2 , k) ;
+
+  //r8ge_cg_Indicator_version2( m ,a , b , x2 , range1 , range2 , k) ; 
+
+  bool isDetected;
+  isDetected= r8ge_cg_Indicator_version2_RelativeError( m ,a , b , x2 , range1 , range2 , k) ;
+  //r8ge_cg_newAlphaImprovement_emin(n , a , b , x2 , range1 , range2 , k) ;
+
+
+
+  double XesNorm2 ;
+  XesNorm2= r8vec_norm(n , x2) ;
+
+  e_norm = r8vec_norm_affine ( n, x1, x2 );
+
+  double result;
+  result = e_norm / XesNorm2 ;
+
+  double finalResult;
+
+  finalResult = log10(result) ;
+
+  cout<<" Relative Error is "<<finalResult << endl ;
+
+
+
+
+
+//
+//  Compute the error.
+//
+  //e_norm = r8vec_norm_affine ( n, x1, x2 );
+//
+//  Report.
+//
+  cout << "\n";
+  //cout << "  Number of variables N = " << n << "\n";
+  //cout << "  Norm of residual ||Ax-b|| = " << r_norm << "\n";
+  //cout << "  Norm of error ||x1-x2|| = " << e_norm << "\n";
+//
+//  Free memory.
+//
+  delete [] a;
+  delete [] b;
+  //delete [] r;
+  delete [] x1;
+  delete [] x2;
+
+  
+  finish();
+
+  if(!isDetected )
+    return finalResult;
+  else
+    return 0 ;
+
+}
+
+
+
 
 void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k , std::string matrixname)
 {

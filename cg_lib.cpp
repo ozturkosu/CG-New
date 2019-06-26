@@ -4216,6 +4216,279 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 }
 
 
+
+bool r8ge_cg_Indicator_version2_RelativeError(int n , double a[] , double b[] , double x[] , int range1 , int range2 , int k)  
+{
+  double alpha;
+  double *ap;
+  double beta;
+  int i;
+  int it;
+  double *p;
+  double pap;
+  double pr;
+  double rTr;
+  double *r; //It takes it as parameter
+  double rap;
+  double curIndicatorValue ; 
+
+  double newIndicator;
+  double prevnewIndicator;
+
+  bool detected = false ;
+
+  cout << " Detection by  Indicator_version2 Method fn_new = alpha * r^T * r to detect soft error  " <<endl ;
+  cout << "" <<endl ;
+
+  //
+  //  Initialize
+  //    AP = A * x,
+  //    R  = b - A * x,
+  //    P  = b - A * x.
+  //
+  ap = r8ge_mv( n, n, a, x );
+  r = new double[n];
+
+
+  for ( i = 0; i < n; i++ )
+  {
+    r[i] = b[i] - ap[i];
+  }
+
+  p = new double[n];
+  for ( i = 0; i < n; i++ )
+  {
+    p[i] = b[i] - ap[i];
+  }
+
+  //
+  //  Do the N steps of the conjugate gradient method.
+  //
+
+  for( it = 1; it <= n; it++ )
+  {
+      // inject bit flip - replace with custom bit injecter
+      if (it == Global::pos) {
+          //injectBitflip (n, a, x, b);
+
+            cout << " Fault Injecting is occurred here" <<endl ;
+            injectBitFlipNotRandom(n , r, p , x , range1 ,  range2 ,  k) ;
+
+      }
+
+
+      //
+      //  Compute the matrix*vector product AP=A*P.
+      //
+
+      delete [] ap;
+      ap = r8ge_mv ( n, n, a, p );
+      
+         //
+      //  Compute the dot products
+      //    PAP = P*AP,
+      //    PR  = P*R
+      //  Set
+      //    ALPHA = PR / PAP.
+
+     pap = r8vec_dot_product ( n, p, ap );
+     pr = r8vec_dot_product ( n, p, r );
+
+     rTr = r8vec_dot_product( n , r , r) ;
+
+     if ( pap == 0.0 )
+     {
+        delete [] ap;
+        break;
+     }
+
+     alpha = pr / pap;
+
+     newIndicator = alpha * rTr ;
+
+      //pr = (rk)^T(rk)
+      //pap = (pk)^T A (pk)  A is Symetric positive definite (SPD)
+
+      //
+      //  Set
+      //    X = X + ALPHA * P
+      //    R = R - ALPHA * AP.
+      //
+
+      for ( i = 0; i < n; i++ )
+      {
+        x[i] = x[i] + alpha * p[i];
+      }
+      for ( i = 0; i < n; i++ )
+      {
+        r[i] = r[i] - alpha * ap[i];
+      }
+
+      //
+      //  Compute the vector dot product
+      //    RAP = R*AP
+      //  Set
+      //    BETA = - RAP / PAP.
+      //
+      rap = r8vec_dot_product ( n, r, ap );
+
+      beta = - rap / pap;
+      //
+      //  Update the perturbation vector
+      //    P = R + BETA * P.
+      //
+      for ( i = 0; i < n; i++ )
+      {
+          p[i] = r[i] + beta * p[i];
+      }
+
+      //Error Detection part
+
+      
+      cout << " new indicator at i "<< it << " NewIndicator= " << newIndicator <<endl; 
+
+      curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
+
+      if ( it == 1)
+      {
+        /* code */
+        Global::previousValueOfIndicator = curIndicatorValue ;
+      }
+
+      
+      cout << "CurProposedIndicatorValue = " << curIndicatorValue  <<endl ;
+
+      if( (abs(newIndicator) - abs(prevnewIndicator)) > abs(prevnewIndicator)*1e+4  && it !=1)//, detector))
+      {
+     
+        cerr << " Bit error detected by newIndicator, terminating application" << endl;
+        cout << " Bit error detected by newIndicator, terminating application" <<endl ;
+        cout << "*******************************************" << endl;
+
+        //cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
+
+        //int& successful = Global::successfulRate ;
+
+        if( it - Global::pos <=10 && it - Global::pos >= 0)
+        {
+          //successful ++ ;
+          Global::successfulRate ++ ;
+        }
+
+        //exit(-1);
+
+        delete [] p;
+        delete [] r;
+       
+        detected = true ;
+
+        return detected;
+
+      } 
+      else if(isinf(newIndicator))
+      {
+        cerr << " Bit error detected by NewIndicator is inf, terminating application" << endl;
+        cout << " Bit error detected by NewIndicator is inf, terminating application" <<endl ;
+        cout << "*******************************************" << endl;
+
+        //cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
+
+        //int& successful = Global::successfulRate ;
+
+        if( it - Global::pos <=10 && it - Global::pos >= 0)
+        {
+          //successful ++ ;
+          Global::successfulRate ++ ;
+        }
+
+        //exit(-1);
+
+        delete [] p;
+        delete [] r;
+       
+        detected = true ;
+
+        return detected ;
+
+      }
+      else if(isnan(newIndicator))
+      {
+        cerr << " Bit error detected by NewIndicator is nan, terminating application" << endl;
+        cout << " Bit error detected by NewIndicator is nan, terminating application" <<endl ;
+        cout << "*******************************************" << endl;
+
+        //cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
+
+        //int& successful = Global::successfulRate ;
+
+        if( it - Global::pos <=10 && it - Global::pos >= 0)
+        {
+          //successful ++ ;
+          Global::successfulRate ++ ;
+        }
+
+
+
+        //exit(-1);
+
+        delete [] p;
+        delete [] r;
+       
+        detected = true ;
+
+        return detected ;
+
+      }
+      
+      else if (improveMethod( curIndicatorValue) && it > 10)
+      {
+        
+        
+        cerr << " Bit error detected by Proposed Indicator, terminating application for improveMethod" << endl;
+        cout << " Bit error detected by Proposed Indicator, terminating application for improveMethod" <<endl ;
+        cout << "*******************************************" << endl;
+
+        cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
+
+        //int& successful = Global::successfulRate ;
+
+        if( it - Global::pos <=10 && it - Global::pos >= 0)
+        {
+          //successful ++ ;
+          Global::successfulRate ++ ;
+        }
+
+        //exit(-1);
+
+        delete [] p;
+        delete [] r;
+        //detector.pop();
+        //detector.pop();
+        //delete detector;
+
+      
+        detected = true ;
+
+        return detected ;
+
+
+
+      }
+      
+
+      prevnewIndicator = newIndicator ;
+
+  }
+
+   delete [] p;
+   delete [] r;
+
+   return detected;
+
+
+
+}
+
 void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int range2 , int k )
 {
     double alpha;
