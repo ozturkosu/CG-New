@@ -614,20 +614,20 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
 //
 //  Choose a random solution.
 //
-  x1 = r8vec_uniform_01_new ( n, seed );
+  x1 = r8vec_uniform_01_new ( m, seed );
 //
 //  Compute the corresponding right hand side.
 //
-  b = r8ge_mv ( n, n, a, x1 );
+  b = r8ge_mv ( m, n, a, x1 );
 //
 //  Call the CG routine.
 //
-  x2 = new double[n];
-  for ( i = 0; i < n; i++ )
+  x2 = new double[m];
+  for ( i = 0; i < m; i++ )
   {
     x2[i] = 1.0;
   }
-  init (n, winSize, thres, flipPosition);
+  init (m, winSize, thres, flipPosition);
 
   //r8ge_cg ( n, a, b, x2 );
 
@@ -643,9 +643,9 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
 
 
   double XesNorm2 ;
-  XesNorm2= r8vec_norm(n , x2) ;
+  XesNorm2= r8vec_norm(m , x2) ;
 
-  e_norm = r8vec_norm_affine ( n, x1, x2 );
+  e_norm = r8vec_norm_affine ( m, x1, x2 );
 
   double result;
   result = e_norm / XesNorm2 ;
