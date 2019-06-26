@@ -92,7 +92,7 @@ int main (int argc, char** argv)
   //int succesfulrateForImprovement = Global::successfulRate ;
   //double unsuccesful = Global::undetectedNumber ;
 
-  averageRelativeError = averageRelativeError / (100 - Global::successfulRate) ;
+  averageRelativeError = sum / (100 - Global::successfulRate) ;
      
 //
 //  Terminate.
@@ -636,7 +636,7 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
 
   //r8ge_cg_Indicator_version2( m ,a , b , x2 , range1 , range2 , k) ; 
 
-  bool isDetected;
+  bool isDetected=false;
   isDetected= r8ge_cg_Indicator_version2_RelativeError( m ,a , b , x2 , range1 , range2 , k) ;
   //r8ge_cg_newAlphaImprovement_emin(n , a , b , x2 , range1 , range2 , k) ;
 
