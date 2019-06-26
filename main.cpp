@@ -407,11 +407,11 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
   seed = rand();
 
 
-  a = pds_random ( n, seed ); // pds is returning random positive definite symmetric matrix
+  //a = pds_random ( n, seed ); // pds is returning random positive definite symmetric matrix
 
 
   //Read Matrix from file // Added Emin at March 6
-  /*
+  
 
   char nameOfMatrix[matrixname.size() +1] ;
   strcpy(nameOfMatrix , matrixname.c_str()) ;
@@ -463,7 +463,7 @@ void r8ge_cg_start_withNewIndicator (int windowSize, int psize, double threshold
 
 
   cout << " Matrix A is filled from file"<<endl ;
-  */
+  
 
 
 //
