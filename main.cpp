@@ -519,7 +519,7 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
 {
 
 
-double *a;
+  double *a;
   double *b;
 
   double e_norm;
@@ -563,7 +563,7 @@ double *a;
   ifstream matrixfile(nameOfMatrix);
   if(!(matrixfile.is_open())){
       cout << "Error : file not found " <<endl;
-      return;
+      return 0;
   }
   int m,ni,l;
   while(matrixfile.peek()=='%') matrixfile.ignore(2048, '\n');
