@@ -553,10 +553,8 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
   seed = rand();
   //a = pds_random ( n, seed );
 
-
+  /*
    //Read Matrix from file // Added Emin at March 6
-  
-
   char nameOfMatrix[matrixname.size() +1] ;
   strcpy(nameOfMatrix , matrixname.c_str()) ;
 
@@ -601,12 +599,40 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
     //cout << " I[i] = " <<I[i] <<" J[i] = " << J[i] << endl ;
 
 
-  }
-  
+  } 
   matrixfile.close() ;
-
-
   cout << " Matrix A is filled from file"<<endl ;
+  */
+
+  double **amat;
+
+  char nameOfMatrix[matrixname.size() +1] ;
+  strcpy(nameOfMatrix , matrixname.c_str()) ;
+
+  ifstream matrixfile(nameOfMatrix);
+  if(!(matrixfile.is_open())){
+          cout<<"Error: file not found"<<endl;
+                return 0;
+  }
+  for(int i = 0; i < M; i++){
+      for(int j = 0; j < N; j++){
+              matrixfile >> amat[i][j];
+                        //cout<<"a[i][j] = "<<a[i][j]<<endl ;
+      }
+  }
+
+  matrixfile.close();
+
+  cout << " Array A is ready "<<endl ;
+
+
+  for (int i = 0; i < n; ++i)
+  {
+                  for (int j = 0; j < n; ++j)
+                  {
+                           a[i*n + j] =amat[i][j] ;
+                  }
+  }
 
 
 
@@ -614,20 +640,20 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
 //
 //  Choose a random solution.
 //
-  x1 = r8vec_uniform_01_new ( m, seed );
+  x1 = r8vec_uniform_01_new ( n, seed );
 //
 //  Compute the corresponding right hand side.
 //
-  b = r8ge_mv ( m, n, a, x1 );
+  b = r8ge_mv ( n, n, a, x1 );
 //
 //  Call the CG routine.
 //
-  x2 = new double[m];
-  for ( i = 0; i < m; i++ )
+  x2 = new double[n];
+  for ( i = 0; i < n; i++ )
   {
     x2[i] = 1.0;
   }
-  init (m, winSize, thres, flipPosition);
+  init (n, winSize, thres, flipPosition);
 
   //r8ge_cg ( n, a, b, x2 );
 
@@ -637,7 +663,7 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
   //r8ge_cg_Indicator_version2( m ,a , b , x2 , range1 , range2 , k) ; 
 
   bool isDetected=false;
-  isDetected= r8ge_cg_Indicator_version2_RelativeError( m ,a , b , x2 , range1 , range2 , k) ;
+  isDetected= r8ge_cg_Indicator_version2_RelativeError( n ,a , b , x2 , range1 , range2 , k) ;
   //r8ge_cg_newAlphaImprovement_emin(n , a , b , x2 , range1 , range2 , k) ;
 
 
