@@ -614,8 +614,8 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
           cout<<"Error: file not found"<<endl;
                 return 0;
   }
-  for(int i = 0; i < M; i++){
-      for(int j = 0; j < N; j++){
+  for(int i = 0; i < n; i++){
+      for(int j = 0; j < n; j++){
               matrixfile >> amat[i][j];
                         //cout<<"a[i][j] = "<<a[i][j]<<endl ;
       }
@@ -669,9 +669,9 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
 
 
   double XesNorm2 ;
-  XesNorm2= r8vec_norm(m , x2) ;
+  XesNorm2= r8vec_norm(n , x2) ;
 
-  e_norm = r8vec_norm_affine ( m, x1, x2 );
+  e_norm = r8vec_norm_affine ( n, x1, x2 );
 
   double result;
   result = e_norm / XesNorm2 ;
