@@ -605,6 +605,9 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
   */
 
   double **amat;
+  amat = new double *[n];
+
+  a = new double[n*n];
 
   char nameOfMatrix[matrixname.size() +1] ;
   strcpy(nameOfMatrix , matrixname.c_str()) ;
