@@ -4109,7 +4109,7 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
            delete [] p;
            delete [] r;
 
-           return ;
+           return true;
 
        } 
        else if(isnan(curRes))
@@ -4131,7 +4131,7 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
         delete [] p;
         delete [] r;
 
-        return ;
+        return true;
 
 
        }
@@ -4152,7 +4152,7 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
           delete [] p;
           delete [] r;
 
-          return ;
+          return true;
 
        }
        else if(isinf(abs(curProposedIndicator)))
@@ -4172,7 +4172,7 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
            delete [] p;
            delete [] r;
 
-           return ;
+           return true;
 
        }
        else if(isnan(curProposedIndicator))
@@ -4194,7 +4194,7 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
         delete [] p;
         delete [] r;
 
-        return ;
+        return true;
 
        }
      
@@ -4207,7 +4207,7 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
   delete [] p;
   delete [] r;
 
-  return;
+  return false;
 
 
 }
