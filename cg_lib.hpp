@@ -85,6 +85,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 void r8ge_bcg_emin(int n, double a[], double b[], double x[] , int range1 , int range2 , int k ) ;
 void r8ge_bcr_emin(int n, double a[], double b[], double x[] , int range1 , int range2 , int k ) ;
 void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1 , int range2 , int k);
+bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[] , int range1 , int range2 , int k);
 
 void getCurIndicatorValue( double x[], double r[] , double b[]) ;
 void initialCheckSum(int n , double r[] , double p[] , double x[]);

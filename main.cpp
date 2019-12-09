@@ -28,7 +28,12 @@ double r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, d
 
 void r8ge_cr_start_withResidual(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
 
+
+
 void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k, std::string matrixname);
+
+double r8ge_gcr_start_withNewIndicatorRelativeErrors(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k , std::string matrixname) ;
+
 void r8ge_gbcg_start_withResidual(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k, std::string matrixname);
 void r8ge_bcg_start_withIndicator(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k , std::string matrixname);
 void r8ge_bcr_start_withIndicator(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k , std::string matrixname);
@@ -81,7 +86,10 @@ int main (int argc, char** argv)
   
     //r8ge_cg_start_withNewIndicator(windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname) ;
 
-    sum = sum + r8ge_cg_start_withNewIndicatorRelativeErrors(windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname) ;
+    //sum = sum + r8ge_cg_start_withNewIndicatorRelativeErrors(windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname) ;
+
+
+    sum = sum + r8ge_gcr_start_withNewIndicatorRelativeErrors(windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname) ;
 
 
     //r8ge_gcr_start_withResidual ( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
@@ -638,8 +646,6 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
   }
 
 
-
-
 //
 //  Choose a random solution.
 //
@@ -709,7 +715,9 @@ double  r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, 
   delete [] x1;
   delete [] x2;
 
-  
+  delete [] amat;
+
+
   finish();
 
   if(!isDetected )
@@ -1634,6 +1642,164 @@ void r8ge_bcr_start_withIndicator(int windowSize, int psize, double threshold, i
 
 
 
+}
+
+double r8ge_gcr_start_withNewIndicatorRelativeErrors(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k , std::string matrixname) 
+{
+
+    double *a;
+  double *b;
+  double e_norm;
+  int i;
+  int n;
+  
+  int seed;
+  double *x1;
+  double *x2;
+
+  int winSize = windowSize;
+  double thres = threshold;
+  int flipPosition = fPos;
+  
+  cout << "\n";
+  cout << "R8GE_CG_TEST\n";
+  cout << "  R8GE_CG applies CG to a full storage matrix.\n";
+
+
+   n = psize;
+//
+//  Let A be the -1 2 -1 matrix.
+//
+  srand (time(NULL));
+  seed = rand();
+
+  //a = pds_random ( n, seed ); // pds is returning random positive definite symmetric matrix
+
+
+  //Read Matrix from file // Added Emin at March 6
+  
+
+  char nameOfMatrix[matrixname.size() +1] ;
+  strcpy(nameOfMatrix , matrixname.c_str()) ;
+
+
+
+
+  //ifstream matrixfile("1138_bus.mtx");
+  //ifstream matrixfile("bcsstk06.mtx");
+  ifstream matrixfile(nameOfMatrix);
+  if(!(matrixfile.is_open())){
+      cout << "Error : file not found " <<endl;
+      return;
+  }
+  int m,ni,l;
+  while(matrixfile.peek()=='%') matrixfile.ignore(2048, '\n');
+  matrixfile>>m>>ni>>l ;
+
+
+  cout << " m = "<<m<<endl ;
+  cout << " n = "<<ni<<endl ;
+  cout << " l = "<<l<<endl ;
+
+  a = new double[m*ni] ;
+  std::fill(a , a + m * ni , 0.) ;
+
+  double *I, *J;
+  double *val ;
+
+  I = new double[l] ;
+  J = new double[l] ;
+  val = new double[l] ;
+
+  int xi , yi ;
+
+  for (int i = 0; i < l; ++i)
+  {
+    /* code */
+    matrixfile >> I[i] >> J[i] >> val[i] ;
+    xi = I[i] -1 ;
+    yi = J[i] -1 ;
+
+    a[xi * m + yi] = val[i] ;
+
+    //cout << " i = " << i << endl ;
+    //cout << "a[x][y] "<< a[xi * m + yi] <<endl ;
+    //cout << " I[i] = " <<I[i] <<" J[i] = " << J[i] << endl ;
+
+
+  }
+  
+  matrixfile.close() ;
+
+
+  cout << " Matrix A is filled from file"<<endl ;
+
+
+
+//
+//  Choose a random solution.
+//
+  x1 = r8vec_uniform_01_new ( m, seed );
+//
+//  Compute the corresponding right hand side.
+//
+  b = r8ge_mv ( m, ni, a, x1 );
+//
+//  Call the CG routine.
+//
+  x2 = new double[m];
+  for ( i = 0; i < m; i++ )
+  {
+    x2[i] = 1.0;
+  }
+  init (m, winSize, thres, flipPosition);
+  //r8ge_cg ( n, a, b, x2 );
+
+
+  //r8ge_cg_Indicator_version2( m ,a , b , x2 , range1 , range2 , k) ; 
+  //r8ge_gcr_Residual( m ,a , b , x2 , range1 , range2 , k) ; 
+
+
+  bool isDetected=false;
+  isDetected= r8ge_gcr_Residual_RelativeError( m ,a , b , x2 , range1 , range2 , k) ;
+  //r8ge_cg_newAlphaImprovement_emin(n , a , b , x2 , range1 , range2 , k) ;
+
+
+
+  double XesNorm2 ;
+  XesNorm2= r8vec_norm(m , x2) ;
+
+  e_norm = r8vec_norm_affine ( m, x1, x2 );
+
+  double result;
+  result = e_norm / XesNorm2 ;
+
+  double finalResult;
+
+  finalResult = log10(result) ;
+
+  cout<<" Relative Error is "<<finalResult << endl ;
+
+
+  cout << "\n";
+
+  delete [] a;
+  delete [] b;
+  
+  delete [] x1;
+  delete [] x2;
+
+  
+  finish();
+
+   if(!isDetected )
+    return finalResult;
+  else
+    return 0 ;
+
+
+
+  
 }
 
 
