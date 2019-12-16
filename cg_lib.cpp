@@ -4077,7 +4077,7 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
           ap[i] = ar[i] + beta*ap[i] ; 
       }
 
-      /*
+      
       //Error Detection
 
       preResidual = curRes ;
@@ -4106,10 +4106,12 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
                   Global::successfulRate ++ ;
           }
 
+           /*
            delete [] p;
            delete [] r;
 
            return true;
+           */
 
        } 
        else if(isnan(curRes))
@@ -4128,10 +4130,12 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
                   Global::successfulRate ++ ;
         }
 
+        /*
         delete [] p;
         delete [] r;
 
         return true;
+         */
 
 
        }
@@ -4149,10 +4153,12 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
                   Global::successfulRate ++ ;
           }
 
+          /*
           delete [] p;
           delete [] r;
 
           return true;
+          */
 
        }
        else if(isinf(abs(curProposedIndicator)))
@@ -4169,10 +4175,12 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
                   Global::successfulRate ++ ;
           }
 
+           /*
            delete [] p;
            delete [] r;
 
            return true;
+           */
 
        }
        else if(isnan(curProposedIndicator))
@@ -4191,15 +4199,16 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
                   Global::successfulRate ++ ;
         }
 
+        /*
         delete [] p;
         delete [] r;
 
         return true;
-
+        */
        }
      
       
-  */
+  
 
 
   }
