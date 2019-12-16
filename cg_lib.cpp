@@ -3815,7 +3815,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
           ap[i] = ar[i] + beta*ap[i] ; 
       }
 
-
+      /*
       //Error Detection
 
       preResidual = curRes ;
@@ -3936,7 +3936,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
 
        }
      
-      
+      */
 
 
 
