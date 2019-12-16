@@ -4351,7 +4351,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       //Error Detection part
 
       
-      cout << " new indicator at i "<< it << " NewIndicator= " << newIndicator <<endl; 
+      //cout << " new indicator at i "<< it << " NewIndicator= " << newIndicator <<endl; 
 
       curIndicatorValue = getCurIndicatorValue( x, r , b, n) ;
 
@@ -4362,14 +4362,14 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       }
 
       
-      cout << "CurProposedIndicatorValue = " << curIndicatorValue  <<endl ;
+      //cout << "CurProposedIndicatorValue = " << curIndicatorValue  <<endl ;
 
       if( (abs(newIndicator) - abs(prevnewIndicator)) > abs(prevnewIndicator)*1e+4  && it !=1)//, detector))
       {
      
-        cerr << " Bit error detected by newIndicator, terminating application" << endl;
-        cout << " Bit error detected by newIndicator, terminating application" <<endl ;
-        cout << "*******************************************" << endl;
+        //cerr << " Bit error detected by newIndicator, terminating application" << endl;
+        //cout << " Bit error detected by newIndicator, terminating application" <<endl ;
+        //cout << "*******************************************" << endl;
 
         //cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
 
@@ -4391,9 +4391,9 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       } 
       else if(isinf(newIndicator))
       {
-        cerr << " Bit error detected by NewIndicator is inf, terminating application" << endl;
-        cout << " Bit error detected by NewIndicator is inf, terminating application" <<endl ;
-        cout << "*******************************************" << endl;
+        //cerr << " Bit error detected by NewIndicator is inf, terminating application" << endl;
+        //cout << " Bit error detected by NewIndicator is inf, terminating application" <<endl ;
+        //cout << "*******************************************" << endl;
 
         //cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
 
@@ -4415,9 +4415,9 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       }
       else if(isnan(newIndicator))
       {
-        cerr << " Bit error detected by NewIndicator is nan, terminating application" << endl;
-        cout << " Bit error detected by NewIndicator is nan, terminating application" <<endl ;
-        cout << "*******************************************" << endl;
+        //cerr << " Bit error detected by NewIndicator is nan, terminating application" << endl;
+        //cout << " Bit error detected by NewIndicator is nan, terminating application" <<endl ;
+        //cout << "*******************************************" << endl;
 
         //cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
 
@@ -4444,11 +4444,11 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       {
         
         
-        cerr << " Bit error detected by Proposed Indicator, terminating application for improveMethod" << endl;
-        cout << " Bit error detected by Proposed Indicator, terminating application for improveMethod" <<endl ;
-        cout << "*******************************************" << endl;
+        //cerr << " Bit error detected by Proposed Indicator, terminating application for improveMethod" << endl;
+        //cout << " Bit error detected by Proposed Indicator, terminating application for improveMethod" <<endl ;
+        //cout << "*******************************************" << endl;
 
-        cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
+        //cout << " New Indicator Convergent Value -x^T*b = " << getFunctionIndicatorCunverge ( n , x ,b ) << endl ;
 
         //int& successful = Global::successfulRate ;
 
