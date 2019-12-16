@@ -12,7 +12,7 @@ main.o: main.cpp
 	#mpic++ -c -I/$(LIBPATH) main.cpp
 	#mv main.o $(LIBPATH)/main.o
 
-mainCGEnergyDefault: cg_lib.o main.o
+mainwithoutDetection: cg_lib.o main.o
 	#g++ main.o $(LIBPATH)/cg_lib.o -lm -o main
 	g++ main.o cg_lib.o -lm -o mainwithoutDetection
 	#mpic++ main.o cg_lib.o -lm -o main
