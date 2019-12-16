@@ -4349,7 +4349,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       }
 
 
-      /*
+      
 
       //Error Detection part
 
@@ -4480,7 +4480,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
       prevnewIndicator = newIndicator ;
 
-      */
+      
 
   }
 
