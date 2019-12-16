@@ -4348,6 +4348,9 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
           p[i] = r[i] + beta * p[i];
       }
 
+
+      /*
+
       //Error Detection part
 
       
@@ -4357,7 +4360,7 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
       if ( it == 1)
       {
-        /* code */
+        
         Global::previousValueOfIndicator = curIndicatorValue ;
       }
 
@@ -4383,10 +4386,10 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
         //exit(-1);
 
-        delete [] p;
-        delete [] r;
+        //delete [] p;
+        //delete [] r;
        
-        return ;
+        //return ;
 
       } 
       else if(isinf(newIndicator))
@@ -4407,8 +4410,8 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
         //exit(-1);
 
-        delete [] p;
-        delete [] r;
+        //delete [] p;
+        //delete [] r;
        
         return ;
 
@@ -4433,10 +4436,10 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
         //exit(-1);
 
-        delete [] p;
-        delete [] r;
+        //delete [] p;
+        //delete [] r;
        
-        return ;
+        //return ;
 
       }
       
@@ -4460,14 +4463,15 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
 
         //exit(-1);
 
-        delete [] p;
-        delete [] r;
+        //delete [] p;
+        //delete [] r;
+
         //detector.pop();
         //detector.pop();
         //delete detector;
 
       
-        return ;
+        //return ;
 
 
 
@@ -4475,6 +4479,8 @@ void r8ge_cg_Indicator_version2(int n , double a[] , double b[] , double x[] , i
       
 
       prevnewIndicator = newIndicator ;
+
+      */
 
   }
 
