@@ -1,6 +1,6 @@
 LIBPATH=$(HOME)/codes/CG
 
-all:mainwithoutDetection
+all:mainwithoutDetectioncg
 
 cg_lib.o: cg_lib.cpp cg_lib.hpp
 	g++ -c -I/$(LIBPATH) cg_lib.cpp
@@ -12,11 +12,11 @@ main.o: main.cpp
 	#mpic++ -c -I/$(LIBPATH) main.cpp
 	#mv main.o $(LIBPATH)/main.o
 
-mainwithoutDetection: cg_lib.o main.o
+mainwithoutDetectioncg: cg_lib.o main.o
 	#g++ main.o $(LIBPATH)/cg_lib.o -lm -o main
-	g++ main.o cg_lib.o -lm -o mainwithoutDetection
+	g++ main.o cg_lib.o -lm -o mainwithoutDetectioncg
 	#mpic++ main.o cg_lib.o -lm -o main
 
 clean:
 	rm *.o   
-	rm mainwithoutDetection
+	rm mainwithoutDetectioncg
