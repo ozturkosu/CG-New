@@ -854,7 +854,18 @@ void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, i
 
 
   //r8ge_cg_Indicator_version2( m ,a , b , x2 , range1 , range2 , k) ; 
+
+
+  time_t currenttime1;
+  time_t currenttime2;
+
+  currenttime1 = time(NULL);
+
   r8ge_gcr_Residual( m ,a , b , x2 , range1 , range2 , k) ; 
+
+  currenttime2 = time(NULL);
+
+  cout << currenttime2 - currenttime1 << " seconds has passed" ;
 
   cout << "\n";
 
