@@ -1,6 +1,6 @@
 LIBPATH=$(HOME)/codes/CG
 
-all:mainCGEnergyDefault
+all:mainwithoutDetection
 
 cg_lib.o: cg_lib.cpp cg_lib.hpp
 	g++ -c -I/$(LIBPATH) cg_lib.cpp
@@ -14,9 +14,9 @@ main.o: main.cpp
 
 mainCGEnergyDefault: cg_lib.o main.o
 	#g++ main.o $(LIBPATH)/cg_lib.o -lm -o main
-	g++ main.o cg_lib.o -lm -o mainCGEnergyDefault
+	g++ main.o cg_lib.o -lm -o mainwithoutDetection
 	#mpic++ main.o cg_lib.o -lm -o main
 
 clean:
 	rm *.o   
-	rm mainCGEnergyDefault
+	rm mainwithoutDetection
