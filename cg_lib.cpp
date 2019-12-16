@@ -4199,12 +4199,12 @@ bool r8ge_gcr_Residual_RelativeError(int n , double a[] , double b[] , double x[
        }
      
       
-
+  */
 
 
   }
 
-  */
+  
   delete [] p;
   delete [] r;
 
