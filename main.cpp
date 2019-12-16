@@ -27,7 +27,7 @@ void  r8ge_cg_start_withNewIndicator(int windowSize, int psize, double threshold
 double r8ge_cg_start_withNewIndicatorRelativeErrors(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k , std::string matrixname) ;
 
 void r8ge_cr_start_withResidual(int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k) ;
-
+double r8ge_cr_start_withEnergyNormRelativeErrors(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k ) ;
 
 
 void r8ge_gcr_start_withResidual (int windowSize, int psize, double threshold, int fPos , int range1 , int range2 , int k, std::string matrixname);
@@ -76,7 +76,7 @@ int main (int argc, char** argv)
   double sum=0;
   double averageRelativeError=0;
  
-  for (int i = 0; i < 100; ++i)
+  for (int i = 0; i < 2; ++i)
   {
     
     cout << "Number of Experience = " << i << endl ;
@@ -89,10 +89,10 @@ int main (int argc, char** argv)
     //sum = sum + r8ge_cg_start_withNewIndicatorRelativeErrors(windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname) ;
 
 
-    sum = sum + r8ge_gcr_start_withNewIndicatorRelativeErrors(windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname) ;
+    //sum = sum + r8ge_gcr_start_withNewIndicatorRelativeErrors(windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname) ;
 
 
-    //r8ge_gcr_start_withResidual ( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
+    r8ge_gcr_start_withResidual ( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
     //r8ge_bcg_start_withIndicator( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
     //r8ge_bcr_start_withIndicator( windowSize, psize, threshold, fPos , range1 , range2 , k , matrixname);
   }
@@ -100,7 +100,7 @@ int main (int argc, char** argv)
   //int succesfulrateForImprovement = Global::successfulRate ;
   //double unsuccesful = Global::undetectedNumber ;
 
-  averageRelativeError = sum / (100 - Global::successfulRate) ;
+  //averageRelativeError = sum / (100 - Global::successfulRate) ;
      
 //
 //  Terminate.
@@ -110,7 +110,7 @@ int main (int argc, char** argv)
   cout << "  Normal end of execution.\n";
   //cout << "  successfulRate for fn indicator"<<succesfulrateForIndicator<<  endl;
   //cout << "  SuccessfulRate for fn with improvement "<< succesfulrateForImprovement <<endl ;
-  cout << "  Averae Relative Error "<<averageRelativeError<<endl ;
+  //cout << "  Averae Relative Error "<<averageRelativeError<<endl ;
 
   cout << " Successful Rate = " << Global::successfulRate << " % " <<endl ; 
   cout << " False Positive Rate = "<<Global::falsePositive <<" % " <<endl ;
@@ -387,6 +387,17 @@ void r8ge_cr_start_withResidual(int windowSize, int psize, double threshold, int
   
   finish();
   return;
+
+
+
+
+
+}
+
+
+
+double r8ge_cr_start_withEnergyNormRelativeErrors(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k ) 
+{
 
 
 
@@ -1647,7 +1658,7 @@ void r8ge_bcr_start_withIndicator(int windowSize, int psize, double threshold, i
 double r8ge_gcr_start_withNewIndicatorRelativeErrors(int windowSize, int psize, double threshold,int fPos , int range1 , int range2 , int k , std::string matrixname) 
 {
 
-    double *a;
+  double *a;
   double *b;
   double e_norm;
   int i;

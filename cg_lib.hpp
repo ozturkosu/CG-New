@@ -146,7 +146,7 @@ class Global {
 };
 
 
-
+/*
 
 // in case of the compiler error - undefined references, please uncomment this
 int Global::MAX_ITER = 0;
