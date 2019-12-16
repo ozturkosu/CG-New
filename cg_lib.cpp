@@ -3816,7 +3816,7 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
       }
 
       
-      /*
+      
 
       //Error Detection
 
@@ -3846,10 +3846,10 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
                   Global::successfulRate ++ ;
           }
 
-           delete [] p;
-           delete [] r;
+           //delete [] p;
+           //delete [] r;
 
-           return ;
+           //return ;
 
        } 
        else if(isnan(curRes))
@@ -3868,10 +3868,10 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
                   Global::successfulRate ++ ;
         }
 
-        delete [] p;
-        delete [] r;
+        //delete [] p;
+        //delete [] r;
 
-        return ;
+        //return ;
 
 
        }
@@ -3889,10 +3889,10 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
                   Global::successfulRate ++ ;
           }
 
-          delete [] p;
-          delete [] r;
+          //delete [] p;
+          //delete [] r;
 
-          return ;
+          //return ;
 
        }
        else if(isinf(abs(curProposedIndicator)))
@@ -3909,10 +3909,10 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
                   Global::successfulRate ++ ;
           }
 
-           delete [] p;
-           delete [] r;
+           //delete [] p;
+           //delete [] r;
 
-           return ;
+           //return ;
 
        }
        else if(isnan(curProposedIndicator))
@@ -3931,15 +3931,15 @@ void r8ge_gcr_Residual(int n , double a[] , double b[] , double x[] , int range1
                   Global::successfulRate ++ ;
         }
 
-        delete [] p;
-        delete [] r;
+        //delete [] p;
+        //delete [] r;
 
-        return ;
+        //return ;
 
        }
      
       
-      */
+      
 
 
   }
