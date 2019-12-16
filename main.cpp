@@ -76,7 +76,7 @@ int main (int argc, char** argv)
   double sum=0;
   double averageRelativeError=0;
  
-  for (int i = 0; i < 2; ++i)
+  for (int i = 0; i < 100; ++i)
   {
     
     cout << "Number of Experience = " << i << endl ;
